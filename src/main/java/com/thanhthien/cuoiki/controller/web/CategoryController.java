@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HomeController {
+public class CategoryController {
+	@GetMapping(value = { "/the-loai" })
+	private ModelAndView categoryPage() {
+		ModelAndView mav = new ModelAndView("web/category.html");
 
-	@GetMapping(value = { "/", "/trang-chu", "/bai-viet" })
-	private ModelAndView homePage() {
-		ModelAndView mav = new ModelAndView("web/home.html");
 		return mav;
 	}
 }
