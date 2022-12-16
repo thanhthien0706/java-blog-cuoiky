@@ -19,15 +19,15 @@ import lombok.Data;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "createAt", nullable = false, updatable = false)
-    @CreatedDate
-    private Date createAt;
+	@Column(name = "createAt", updatable = false)
+	@CreatedDate
+	private Date createAt;
 
-    @Column
-    @LastModifiedDate
-    private LocalDateTime updateAt;
+	@Column
+	@LastModifiedDate
+	private LocalDateTime updateAt;
 }
