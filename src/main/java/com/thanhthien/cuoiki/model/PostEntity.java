@@ -39,6 +39,9 @@ public class PostEntity extends BaseEntity {
 	private String title;
 
 	@Column
+	private String avatar;
+
+	@Column
 	private String slug;
 
 	@Column

@@ -1,5 +1,6 @@
 package com.thanhthien.cuoiki.services;
 
+import com.thanhthien.cuoiki.form.SignupForm;
 import com.thanhthien.cuoiki.model.UserEntity;
 
 public interface IUserService {
@@ -8,4 +9,6 @@ public interface IUserService {
 	UserEntity findOneByEmail(String email);
 
 	UserEntity findOneById(Long id);
+
+	UserEntity saveUser(SignupForm signupForm);
 }

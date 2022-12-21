@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/mainLayout}">
+<head>
+<meta charset="UTF-8">
+<!-- - $LAYOUT_TITLE -->
+<title layout:title-pattern="$CONTENT_TITLE">Posts Page</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<h2 class="font-weight-bold">Posts Manager</h2>
+
+		<div class="text-right mb-4" style="text-align: end">
+			<a class="btn btn-primary" href="/admin/post/add">Add Post</a>
+		</div>
+
+		<table class="table table-hover table-dark">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">First</th>
+					<th scope="col">Last</th>
+					<th scope="col">Handle</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th scope="row">3</th>
+					<td colspan="2">Larry the Bird</td>
+					<td>@twitter</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>

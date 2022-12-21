@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) {
 		UserEntity user = userRepository.findByUserName(username);
-		;
+
 		if (user != null) {
 			return new CustomUserDetails(user);
 		}
