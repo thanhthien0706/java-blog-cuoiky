@@ -42,6 +42,7 @@ public class UserService implements IUserService {
 	public UserEntity saveUser(SignupForm signupForm) {
 		UserEntity user = new UserEntity();
 		user.setActive(true);
+		user.setAvatar("https://res.cloudinary.com/dd1yamek1/image/upload/v1671810246/db-javaweb/user_veikez.png");
 		user.setFullName(signupForm.getFullname());
 		user.setUserName(signupForm.getUsername());
 		user.setEmail(signupForm.getEmail());

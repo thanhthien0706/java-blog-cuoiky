@@ -13,8 +13,6 @@ import com.thanhthien.cuoiki.form.SignupForm;
 import com.thanhthien.cuoiki.model.UserEntity;
 import com.thanhthien.cuoiki.services.impl.UserService;
 
-import ch.qos.logback.core.model.Model;
-
 @Controller
 public class authController {
 

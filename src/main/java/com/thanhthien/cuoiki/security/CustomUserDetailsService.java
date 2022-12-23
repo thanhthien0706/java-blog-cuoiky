@@ -22,8 +22,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if (user != null) {
 			return new CustomUserDetails(user);
 		}
-		return (UserDetails) new UsernameNotFoundException("Invalid email or password");
 
+		return (UserDetails) new UsernameNotFoundException("Invalid email or password");
 	}
 
 	public UserDetails loadUserById(long id) {
