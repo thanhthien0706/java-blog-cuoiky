@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto extends BaseDto {
-	private String fullName;
-	private String userName;
+public class PostDto2 {
+	private Long id;
+	private String title;
 	private String avatar;
-	private String email;
-	private Boolean active;
-	private String roleName;
+	private String slug;
+	private String summary;
 }

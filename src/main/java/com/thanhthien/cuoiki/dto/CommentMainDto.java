@@ -9,16 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDto extends BaseDto {
-	private String title;
-	private String avatar;
-	private String slug;
-	private String summary;
+public class CommentMainDto extends BaseDto {
+	private Long postId;
 	private String content;
-	private String status;
+	private Boolean status;
 	private Boolean deleted;
 	private Date deleteAt;
-	private String[] categories;
-	private PostDto parentPost;
-
 }

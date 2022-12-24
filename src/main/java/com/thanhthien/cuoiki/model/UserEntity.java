@@ -42,7 +42,7 @@ public class UserEntity extends BaseEntity {
 	private String password;
 
 	@Column
-	private boolean active = true;
+	private Boolean active = true;
 
 	@ManyToOne
 	@JoinColumn(name = "role_id")
