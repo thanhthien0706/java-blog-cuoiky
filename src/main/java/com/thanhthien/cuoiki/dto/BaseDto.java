@@ -1,7 +1,7 @@
 package com.thanhthien.cuoiki.dto;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

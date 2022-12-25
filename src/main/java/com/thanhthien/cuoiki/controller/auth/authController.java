@@ -33,7 +33,6 @@ public class authController {
 
 	@PostMapping("/dang-nhap")
 	private String postLogin() {
-		System.out.println("Chao ban Da vao Login");
 //		ModelAndView mav = new ModelAndView("login.html");
 		return "dang nhap";
 	}

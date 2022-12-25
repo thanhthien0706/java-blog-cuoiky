@@ -21,6 +21,7 @@ import com.thanhthien.cuoiki.security.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	CustomUserDetailsService userDetailsService;
@@ -46,8 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/**").permitAll().and()
-			.formLogin().loginPage("/dang-nhap")
-			.loginProcessingUrl("/dang-nhap")
+			.formLogin().loginPage("/dang-nhap").loginProcessingUrl("/dang-nhap")
 			.defaultSuccessUrl("/trang-chu").and()
 			.logout().logoutUrl("/dang-xuat").logoutSuccessUrl("/trang-chu").and()
 			.csrf().disable();

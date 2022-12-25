@@ -1,24 +1,20 @@
-package com.thanhthien.cuoiki.form;
+package com.thanhthien.cuoiki.dto;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import com.thanhthien.cuoiki.model.EnumType.StatusPost;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PostCreateForm {
-
+@AllArgsConstructor
+public class PostEditDto {
+	private Long id;
 	private String title;
-	private MultipartFile avatar;
+	private String avatar;
 	private String summary;
 	private String content;
 	private String status;
 	private String categories;
-	private Long authorId;
-
 }

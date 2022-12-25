@@ -57,9 +57,11 @@
     	  
     	  const inputContent = $("#inputContent");
     	  const formAddPost = $("#formAddPost");
+    	  const formEditPost = $("#formEditPost")
+    	  const inputContentEdit = $("#inputContentEdit");
     	  
         $("#summernote").summernote({
-          placeholder: "Hello stand alone ui",
+          placeholder: "Hello enter conent",
           tabsize: 2,
           height: 120,
           toolbar: [
@@ -86,6 +88,21 @@
         	
         	console.log("da vao")
         })
+        
+        const valueContent = inputContentEdit.val();
+        $('#summernoteEdit').summernote('code', valueContent);
+        
+        $("#btnEditPost").click(()=>{
+        	const markupStr = $('#summernoteEdit').summernote('code');
+        	inputContentEdit.val(markupStr);
+        	
+        	const idPost = $("#inputIdEdit").val();
+        	
+        	formEditPost.attr("action",`/admin/post/edit/${idPost}`)
+        	formEditPost.attr("method","post")
+        	formEditPost.submit();
+        })
+        
       });
     </script>
 </body>

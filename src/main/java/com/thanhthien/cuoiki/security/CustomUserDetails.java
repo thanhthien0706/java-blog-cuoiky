@@ -19,6 +19,8 @@ import lombok.NoArgsConstructor;
 public class CustomUserDetails implements UserDetails {
 	UserEntity user;
 
+	Long id;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName());

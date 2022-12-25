@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/mainLayout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- - $LAYOUT_TITLE -->
+    <title layout:title-pattern="$CONTENT_TITLE">Edit Post</title>
+  </head>
+  <body>
+    <div layout:fragment="content" class="container mb-4">
+      <h2 class="font-weight-bold">Edit Post Manager</h2>
+      <form
+        id="formEditPost"
+        action="javascript:void(0)"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input
+          type="hidden"
+          id="inputIdEdit"
+          name="idPost"
+          th:value="${post.id}"
+        />
+        <div class="form-group mb-3">
+          <label for="inputTitle">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputTitle"
+            placeholder="Title of post"
+            name="title"
+            th:value="${post.title}"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="inputCategory">Categories</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputCategory"
+            name="categories"
+            placeholder="vd: cong nghe, kinh te"
+            th:value="${post.categories}"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="inputSummary">Summary</label>
+          <textarea
+            name="summary"
+            class="form-control"
+            id="inputSummary"
+            rows="3"
+            th:text="${post.summary}"
+          ></textarea>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="inputSummary" class="mr-4">Avatar</label>
+          <img
+            alt=""
+            th:src="${post.avatar}"
+            class=""
+            style="width: 100px; height: 100px; border-radius: 10px"
+          />
+        </div>
+
+        <div class="custom-file mb-3">
+          <input
+            name="avatar"
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+          />
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="exampleFormControlSelect1">Status Post</label>
+          <select
+            name="status"
+            class="form-control"
+            id="exampleFormControlSelect1"
+          >
+            <option value="DRAFT" th:selected="${post.status == 'DRAFT'}">
+              Draft
+            </option>
+            <option value="PUBLIC" th:selected="${post.status == 'PUBLIC'}">
+              Public
+            </option>
+            <option value="UNPUBLIC" th:selected="${post.status == 'UNPUBLIC'}">
+              Unpublic
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="inputContent">Content</label>
+          <div id="summernoteEdit"></div>
+          <input
+            type="hidden"
+            id="inputContentEdit"
+            name="content"
+            th:value="${post.content}"
+          />
+        </div>
+
+        <button id="btnEditPost" class="btn btn-primary text-align-center">
+          Update Post
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

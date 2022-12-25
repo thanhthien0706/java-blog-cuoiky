@@ -7,5 +7,7 @@ import com.thanhthien.cuoiki.model.CategoryEntity;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
+	Boolean existsBySlug(String slug);
 
+	CategoryEntity findOneBySlug(String slug);
 }

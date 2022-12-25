@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import com.thanhthien.cuoiki.dto.CategoryMainDto;
 import com.thanhthien.cuoiki.dto.PostMaintDto;
+import com.thanhthien.cuoiki.dto.PostShowDto;
 import com.thanhthien.cuoiki.form.PostCreateForm;
 import com.thanhthien.cuoiki.dto.PostDto2;
+import com.thanhthien.cuoiki.dto.PostEditDto;
 import com.thanhthien.cuoiki.model.CategoryEntity;
 import com.thanhthien.cuoiki.model.PostEntity;
 import com.thanhthien.cuoiki.model.EnumType.StatusPost;
@@ -34,9 +36,9 @@ public class PostConvert {
 		post.setContent(form.getContent());
 
 		StatusPost status;
-		if (form.getStatus() == "DRAFT") {
+		if (form.getStatus().equals("DRAFT")) {
 			status = StatusPost.DRAFT;
-		} else if (form.getStatus() == "PUBLIC") {
+		} else if (form.getStatus().equals("PUBLIC")) {
 			status = StatusPost.PUBLIC;
 		} else {
 			status = StatusPost.UNPUBLIC;
@@ -98,4 +100,63 @@ public class PostConvert {
 		return dto2s;
 	}
 
+	public PostShowDto toDtoShow(PostEntity post) {
+		PostShowDto dto = new PostShowDto();
+
+		dto.setAuthor(userConvert.toDto(post.getAuthor()));
+		if (post.getParent() != null) {
+			dto.setPostParrent(toDtoShow(post.getParent()));
+		} else {
+			dto.setPostParrent(null);
+		}
+		dto.setTitle(post.getTitle());
+		dto.setAvatar(post.getAvatar());
+		dto.setSlug(post.getSlug());
+		dto.setSummary(post.getSummary());
+		dto.setStatus(post.getStatus().name());
+		dto.setDeleteAt(post.getDeleteAt());
+		dto.setDeleted(post.getDeleted());
+		dto.setCountComments(post.getComments().size());
+		dto.setCategories(categoryConvert.toListDto(post.getCategories()));
+		dto.setId(post.getId());
+		dto.setCreateAt(post.getCreateAt());
+		dto.setUpdateAt(post.getUpdateAt());
+
+		return dto;
+	}
+
+	public List<PostShowDto> toListDtoShow(List<PostEntity> posts) {
+		List<PostShowDto> dtos = new ArrayList<>();
+
+		for (PostEntity post : posts) {
+			dtos.add(toDtoShow(post));
+		}
+
+		return dtos;
+	}
+
+	public PostEditDto toDtoEdit(PostEntity post) {
+		PostEditDto dto = new PostEditDto();
+
+		dto.setId(post.getId());
+		dto.setTitle(post.getTitle());
+		dto.setAvatar(post.getAvatar());
+		dto.setStatus(post.getStatus().name());
+		dto.setSummary(post.getSummary());
+		dto.setContent(post.getContent());
+
+		String categories = "";
+
+		for (CategoryEntity category : post.getCategories()) {
+			if (categories.isEmpty()) {
+				categories += category.getTitle();
+			} else {
+				categories += ", " + category.getTitle();
+			}
+		}
+
+		dto.setCategories(categories);
+
+		return dto;
+	}
 }

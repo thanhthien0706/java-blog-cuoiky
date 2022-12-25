@@ -1,50 +1,93 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{admin/mainLayout}">
-<head>
-<meta charset="UTF-8">
-<!-- - $LAYOUT_TITLE -->
-<title layout:title-pattern="$CONTENT_TITLE">Posts Page</title>
-</head>
-<body>
-	<div layout:fragment="content" class="container">
-		<h2 class="font-weight-bold">Posts Manager</h2>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/mainLayout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- - $LAYOUT_TITLE -->
+    <title layout:title-pattern="$CONTENT_TITLE">Posts Page</title>
+  </head>
+  <body>
+    <div layout:fragment="content" class="container">
+      <h2 class="font-weight-bold">Posts Manager</h2>
 
-		<div class="text-right mb-4" style="text-align: end">
-			<a class="btn btn-primary" href="/admin/post/add">Add Post</a>
-		</div>
+      <div class="text-right mb-4" style="text-align: end">
+        <a class="btn btn-primary" href="/admin/post/add">Add Post</a>
+      </div>
 
-		<table class="table table-hover table-dark">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">First</th>
-					<th scope="col">Last</th>
-					<th scope="col">Handle</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td colspan="2">Larry the Bird</td>
-					<td>@twitter</td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
-</body>
+      <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Status</th>
+            <th scope="col">Comments</th>
+            <th scope="col">Parent</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="post,iter : ${posts}">
+            <th scope="row" style="text-align: center; vertical-align: middle" th:text="${iter.index} + 1">
+              
+            </th>
+            <td style="text-align: center; vertical-align: middle;">
+              <img
+                alt=""
+                th:src="${post.avatar}"
+                style="
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 8px;
+                "
+              />
+            </td>
+            <td
+              th:text="${post.title}"
+              style="text-align: center; vertical-align: middle"
+            ></td>
+            <td
+              th:text="${post.author.userName}"
+              style="text-align: center; vertical-align: middle"
+            ></td>
+            <td
+              th:text="${post.status}"
+              style="text-align: center; vertical-align: middle"
+            ></td>
+            <td
+              th:text="${post.countComments}"
+              style="text-align: center; vertical-align: middle"
+            ></td>
+            <td
+              th:if="${post.postParrent}"
+              th:text="${post.postParrent.id}"
+              style="text-align: center; vertical-align: middle"
+            ></td>
+            <td
+              th:unless="${post.postParrent}"
+              style="text-align: center; vertical-align: middle"
+            >
+              Not Parrent
+            </td>
+            <td
+              th:text="${post.createAt}"
+              style="text-align: center; vertical-align: middle"
+            ></td>
+<!-- th:href="@{/admin/post/edit/${post.id}}" -->
+            <td class="d-flex flex-column" style="text-align: center; vertical-align: middle">
+              <a class="btn btn-success mb-2"> <i class="fa-solid fa-eye"></i></a>
+              <a th:href="@{'/admin/post/edit/'+ ${post.id}}" class="btn btn-primary mb-2"> <i class="fa-solid fa-pen-to-square"></i></a>
+              <a th:href="@{'/admin/post/delete/'+ ${post.id}}" class="btn btn-danger"> <i class="fa-solid fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>

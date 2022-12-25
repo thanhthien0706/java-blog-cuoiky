@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		UserEntity user = userRepository.findByUserName(username);
 
 		if (user != null) {
-			return new CustomUserDetails(user);
+			return new CustomUserDetails(user, user.getId());
 		}
 
 		return (UserDetails) new UsernameNotFoundException("Invalid email or password");
@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserById(long id) {
 		UserEntity user = userRepository.findOneById(id);
 		;
-		return new CustomUserDetails(user);
+		return new CustomUserDetails(user, user.getId());
 	}
 
 }

@@ -18,10 +18,10 @@ public class UserService implements IUserService {
 	UserRepository userRepository;
 
 	@Autowired
-	private RoleRepository roleRepository;
+	RoleRepository roleRepository;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserEntity findByUserName(String username) {
@@ -62,6 +62,10 @@ public class UserService implements IUserService {
 
 		return null;
 
+	}
+
+	public String getTest() {
+		return "Vao dduowcj nha";
 	}
 
 }
