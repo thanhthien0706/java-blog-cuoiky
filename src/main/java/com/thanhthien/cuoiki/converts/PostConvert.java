@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.thanhthien.cuoiki.dto.CategoryMainDto;
 import com.thanhthien.cuoiki.dto.PostMaintDto;
 import com.thanhthien.cuoiki.dto.PostShowDto;
+import com.thanhthien.cuoiki.dto.PostShowHomeDto;
 import com.thanhthien.cuoiki.form.PostCreateForm;
 import com.thanhthien.cuoiki.dto.PostDto2;
 import com.thanhthien.cuoiki.dto.PostEditDto;
@@ -159,4 +160,40 @@ public class PostConvert {
 
 		return dto;
 	}
+
+	public PostShowHomeDto toDtoShowHome(PostEntity post) {
+		PostShowHomeDto dto = new PostShowHomeDto();
+
+		dto.setId(post.getId());
+		dto.setCreateAt(post.getCreateAt());
+		dto.setUpdateAt(post.getUpdateAt());
+		dto.setTitle(post.getTitle());
+		dto.setAvatar(post.getAvatar());
+		String categories = "";
+
+		for (CategoryEntity category : post.getCategories()) {
+			if (categories.isEmpty()) {
+				categories += category.getTitle();
+			} else {
+				categories += ", " + category.getTitle();
+			}
+		}
+
+		dto.setCategory(categories);
+
+		dto.setCount(post.getCount());
+
+		return dto;
+	}
+
+	public List<PostShowHomeDto> toListDtoShowHome(List<PostEntity> posts) {
+		List<PostShowHomeDto> dtos = new ArrayList<>();
+
+		for (PostEntity post : posts) {
+			dtos.add(toDtoShowHome(post));
+		}
+
+		return dtos;
+	}
+
 }

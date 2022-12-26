@@ -15,6 +15,7 @@ import com.thanhthien.cuoiki.converts.UserConvert;
 import com.thanhthien.cuoiki.dto.PostEditDto;
 import com.thanhthien.cuoiki.dto.PostMaintDto;
 import com.thanhthien.cuoiki.dto.PostShowDto;
+import com.thanhthien.cuoiki.dto.PostShowHomeDto;
 import com.thanhthien.cuoiki.form.CategoryCreateForm;
 import com.thanhthien.cuoiki.form.PostCreateForm;
 import com.thanhthien.cuoiki.form.PostEditForm;
@@ -134,7 +135,7 @@ public class PostService implements IPostService {
 		} else if (status == "DRAFT") {
 			posts = postRepository.findAllByStatus(StatusPost.DRAFT);
 		} else {
-			posts = postRepository.findAll();
+			posts = postRepository.findAllByOrderByCreateAtDesc();
 		}
 
 		List<PostShowDto> postShows = postConvert.toListDtoShow(posts);
@@ -228,6 +229,32 @@ public class PostService implements IPostService {
 	@Override
 	public void deletePostById(Long id) {
 		postRepository.deleteById(id);
+	}
+
+	@Override
+	public List<PostShowHomeDto> getAllPostNew() {
+		List<PostEntity> posts = postRepository.findAllByOrderByCreateAtDesc();
+
+		if (posts == null) {
+			return null;
+		}
+
+		List<PostShowHomeDto> dtos = postConvert.toListDtoShowHome(posts);
+
+		return dtos;
+	}
+
+	@Override
+	public List<PostShowHomeDto> getPostsCount(int limit) {
+		List<PostEntity> postEntity = postRepository.getPostOrderCountWithLimit(limit);
+
+		if (postEntity == null) {
+			return null;
+		}
+
+		List<PostShowHomeDto> dtos = postConvert.toListDtoShowHome(postEntity);
+
+		return dtos;
 	}
 
 }

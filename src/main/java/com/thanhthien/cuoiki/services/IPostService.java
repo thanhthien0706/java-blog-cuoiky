@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.thanhthien.cuoiki.dto.PostEditDto;
 import com.thanhthien.cuoiki.dto.PostShowDto;
+import com.thanhthien.cuoiki.dto.PostShowHomeDto;
 import com.thanhthien.cuoiki.form.PostCreateForm;
 import com.thanhthien.cuoiki.form.PostEditForm;
 import com.thanhthien.cuoiki.model.PostEntity;
@@ -22,5 +23,9 @@ public interface IPostService {
 	PostEntity updatePost(PostEditForm postEditForm);
 
 	void deletePostById(Long id);
+
+	List<PostShowHomeDto> getAllPostNew();
+
+	List<PostShowHomeDto> getPostsCount(int limit);
 
 }

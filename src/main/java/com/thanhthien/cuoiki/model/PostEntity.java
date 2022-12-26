@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -50,15 +51,18 @@ public class PostEntity extends BaseEntity {
 	@Column
 	private String slug;
 
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String summary;
 
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String content;
 
 	@Column
 	@Enumerated(EnumType.STRING)
 	private StatusPost status;
+
+	@Column
+	private Long count = 0l;
 
 	@Column
 	private Boolean deleted = Boolean.FALSE;
