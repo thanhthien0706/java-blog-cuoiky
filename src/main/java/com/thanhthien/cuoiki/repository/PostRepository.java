@@ -19,6 +19,9 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
 	List<PostEntity> findAllByOrderByCreateAtDesc();
 
-	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p ORDER BY p.count DESC LIMIT 4")
+	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.status = 'PUBLIC' ORDER BY p.count DESC LIMIT :limit")
 	List<PostEntity> getPostOrderCountWithLimit(int limit);
+
+	@Query(nativeQuery = true, value = "SELECT p.* FROM db_posts p JOIN post_category pc ON p.id = pc.post_id WHERE pc.category_id = :idCategory ORDER BY p.count DESC LIMIT :limit")
+	List<PostEntity> getPostWithCatogryAndLimit(Long idCategory, int limit);
 }

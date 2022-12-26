@@ -28,4 +28,6 @@ public interface IPostService {
 
 	List<PostShowHomeDto> getPostsCount(int limit);
 
+	List<PostShowHomeDto> getPostWithCatogryAndLimit(Long idCategory, int limit);
+
 }

@@ -257,4 +257,17 @@ public class PostService implements IPostService {
 		return dtos;
 	}
 
+	@Override
+	public List<PostShowHomeDto> getPostWithCatogryAndLimit(Long idCategory, int limit) {
+		List<PostEntity> postEntity = postRepository.getPostWithCatogryAndLimit(idCategory, limit);
+
+		if (postEntity == null) {
+			return null;
+		}
+
+		List<PostShowHomeDto> dtos = postConvert.toListDtoShowHome(postEntity);
+
+		return dtos;
+	}
+
 }
