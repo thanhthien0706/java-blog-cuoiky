@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thanhthien.cuoiki.converts.CategoryConvert;
+import com.thanhthien.cuoiki.dto.CategoryListDto;
 import com.thanhthien.cuoiki.dto.CategoryShowHomeDto;
 import com.thanhthien.cuoiki.form.CategoryCreateForm;
 import com.thanhthien.cuoiki.model.CategoryEntity;
@@ -78,6 +79,20 @@ public class CategoryService implements ICategoryService {
 		}
 
 		List<CategoryShowHomeDto> dtos = categoryConvert.toListDtoShowHome(category);
+
+		return dtos;
+	}
+
+	@Override
+	public List<CategoryListDto> findAllNameListCategory() {
+
+		List<CategoryEntity> categories = categoryRepository.findAll();
+
+		if (categories == null) {
+			return null;
+		}
+
+		List<CategoryListDto> dtos = categoryConvert.toListDtoAllCategory(categories);
 
 		return dtos;
 	}

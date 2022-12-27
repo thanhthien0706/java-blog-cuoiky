@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.thanhthien.cuoiki.converts.CommentConvert;
 import com.thanhthien.cuoiki.dto.CommentMainDto;
+import com.thanhthien.cuoiki.form.CommentCreateForm;
 import com.thanhthien.cuoiki.model.CommentEntity;
 import com.thanhthien.cuoiki.model.PostEntity;
 import com.thanhthien.cuoiki.repository.CommentRepository;
 import com.thanhthien.cuoiki.repository.PostRepository;
+import com.thanhthien.cuoiki.repository.UserRepository;
 import com.thanhthien.cuoiki.services.ICommentService;
 
 @Service
@@ -24,6 +26,9 @@ public class CommentService implements ICommentService {
 
 	@Autowired
 	PostRepository postRepository;
+
+	@Autowired
+	UserRepository userRepository;
 
 	@Override
 	public List<CommentMainDto> getAllCommentWithSlugPost(String slug, int limit) {
@@ -43,6 +48,24 @@ public class CommentService implements ICommentService {
 		List<CommentMainDto> dtos = commentConvert.toListDto(comments);
 
 		return dtos;
+	}
+
+	@Override
+	public CommentMainDto createComment(CommentCreateForm commentCreateForm) {
+
+		CommentEntity commentEntity = commentConvert.toEntity(commentCreateForm);
+		commentEntity.setPost(postRepository.findOneById(commentCreateForm.getIdPost()));
+		commentEntity.setUser(userRepository.findOneById(commentCreateForm.getIdUser()));
+
+		commentEntity = commentRepository.save(commentEntity);
+
+		if (commentEntity == null) {
+			return null;
+		}
+
+		CommentMainDto dto = commentConvert.toDto(commentEntity);
+
+		return dto;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.thanhthien.cuoiki.dto.CategoryListDto;
 import com.thanhthien.cuoiki.dto.CategoryMainDto;
 import com.thanhthien.cuoiki.dto.CategoryShowHomeDto;
 import com.thanhthien.cuoiki.model.CategoryEntity;
@@ -60,6 +61,30 @@ public class CategoryConvert {
 
 		for (CategoryEntity category : categories) {
 			dtos.add(toDtoShowHome(category));
+		}
+
+		return dtos;
+	}
+
+	public CategoryListDto toDtoAllCategory(CategoryEntity category) {
+
+		CategoryListDto dto = new CategoryListDto();
+
+		dto.setId(category.getId());
+		dto.setCreateAt(category.getCreateAt());
+		dto.setUpdateAt(category.getUpdateAt());
+		dto.setTitle(category.getTitle());
+		dto.setCountPost(category.getPosts().size());
+
+		return dto;
+
+	}
+
+	public List<CategoryListDto> toListDtoAllCategory(List<CategoryEntity> categories) {
+		List<CategoryListDto> dtos = new ArrayList<>();
+
+		for (CategoryEntity category : categories) {
+			dtos.add(toDtoAllCategory(category));
 		}
 
 		return dtos;

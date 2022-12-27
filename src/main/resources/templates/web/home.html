@@ -45,7 +45,7 @@
                             th:text="${post.category}"
                           ></span>
                           <h4>
-                            <a th:text="${#strings.abbreviate(post.title,50)}"
+                            <a th:href="@{'/bai-viet/' + ${post.slug}}" th:text="${#strings.abbreviate(post.title,50)}"
                               >Get the Illusion of Fuller Lashes by “Mascng.”</a
                             >
                           </h4>
@@ -73,7 +73,7 @@
                       >Concert</span
                     >
                     <h4>
-                      <a href="details.html" th:text="${#strings.abbreviate(post.title,60)}"
+                      <a th:href="@{'/bai-viet/' + ${post.slug}}" th:text="${#strings.abbreviate(post.title,60)}"
                         >Welcome To The Best Model Winner Contest</a
                       >
                     </h4>
@@ -113,7 +113,7 @@
                         >Strike</span
                       >
                       <h4>
-                        <a href="#" th:text="${#strings.abbreviate(post.title,60)}"
+                        <a th:href="@{'/bai-viet/' + ${post.slug}}" th:text="${#strings.abbreviate(post.title,60)}"
                           >Welcome To The Best Model Winner Contest</a
                         >
                       </h4>
@@ -159,7 +159,7 @@
                         25 Jan 2020
                       </p>
                       <h4>
-                        <a href="#" th:text="${#strings.abbreviate(post.title,60)}"
+                        <a th:href="@{'/bai-viet/' + ${post.slug}}" th:text="${#strings.abbreviate(post.title,60)}"
                           ></a
                         >
                       </h4>
@@ -226,7 +226,7 @@
                               <div class="what-cap">
                                 <span class="color1" th:text="${post.category}"></span>
                                 <h4>
-                                  <a href="#" th:text="${#strings.abbreviate(post.title,60)}"></a>
+                                  <a th:href="@{'/bai-viet/' + ${post.slug}}" th:text="${#strings.abbreviate(post.title,60)}"></a>
                                 </h4>
                               </div>
                             </div>

@@ -55,7 +55,7 @@
 														<div class="what-cap">
 															<span class="color1" th:text="${post.category}"></span>
 															<h4>
-																<a href="#"
+																<a th:href="@{'/bai-viet/' + ${post.slug}}"
 																	th:text="${#strings.abbreviate(post.title,60)}"></a>
 															</h4>
 														</div>
