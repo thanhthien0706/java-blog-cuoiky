@@ -26,7 +26,7 @@ public class HomeController {
 	@Autowired
 	CategoryService categoryService;
 
-	@GetMapping(value = { "/", "/trang-chu", "/bai-viet" })
+	@GetMapping(value = { "/", "/trang-chu" })
 	private ModelAndView homePage(@RequestParam(name = "the-loai", required = false) Long idCategory) {
 
 		List<PostShowHomeDto> postCount1 = postService.getPostsCount(4);

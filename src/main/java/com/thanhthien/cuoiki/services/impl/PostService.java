@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.thanhthien.cuoiki.converts.PostConvert;
 import com.thanhthien.cuoiki.converts.UserConvert;
+import com.thanhthien.cuoiki.dto.PostDetailDto;
 import com.thanhthien.cuoiki.dto.PostEditDto;
 import com.thanhthien.cuoiki.dto.PostMaintDto;
 import com.thanhthien.cuoiki.dto.PostShowDto;
@@ -268,6 +269,18 @@ public class PostService implements IPostService {
 		List<PostShowHomeDto> dtos = postConvert.toListDtoShowHome(postEntity);
 
 		return dtos;
+	}
+
+	@Override
+	public PostDetailDto getPostDetailWithSlug(String slug) {
+		PostEntity post = postRepository.findOneBySlug(slug);
+
+		if (post != null) {
+			PostDetailDto dto = postConvert.toDtoDetail(post);
+			return dto;
+		}
+
+		return null;
 	}
 
 }

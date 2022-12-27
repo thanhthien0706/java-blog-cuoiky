@@ -24,4 +24,9 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
 	@Query(nativeQuery = true, value = "SELECT p.* FROM db_posts p JOIN post_category pc ON p.id = pc.post_id WHERE pc.category_id = :idCategory ORDER BY p.count DESC LIMIT :limit")
 	List<PostEntity> getPostWithCatogryAndLimit(Long idCategory, int limit);
+
+	PostEntity findOneBySlug(String slug);
+
+	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.slug = \' + :slug + \' LIMIT 1")
+	PostEntity getOnePostBySlug(String slug);
 }

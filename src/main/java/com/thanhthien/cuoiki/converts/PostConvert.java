@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.thanhthien.cuoiki.dto.CategoryMainDto;
+import com.thanhthien.cuoiki.dto.PostDetailDto;
 import com.thanhthien.cuoiki.dto.PostMaintDto;
 import com.thanhthien.cuoiki.dto.PostShowDto;
 import com.thanhthien.cuoiki.dto.PostShowHomeDto;
@@ -168,6 +169,7 @@ public class PostConvert {
 		dto.setCreateAt(post.getCreateAt());
 		dto.setUpdateAt(post.getUpdateAt());
 		dto.setTitle(post.getTitle());
+		dto.setSlug(post.getSlug());
 		dto.setAvatar(post.getAvatar());
 		String categories = "";
 
@@ -194,6 +196,50 @@ public class PostConvert {
 		}
 
 		return dtos;
+	}
+
+	public PostDetailDto toDtoDetail(PostEntity post) {
+
+		PostDetailDto dto = new PostDetailDto();
+
+		dto.setId(post.getId());
+		dto.setTitle(post.getTitle());
+		dto.setAvatar(post.getAvatar());
+		dto.setSlug(post.getSlug());
+		dto.setSummary(post.getSummary());
+		dto.setContent(post.getContent());
+		dto.setStatus(post.getStatus().name());
+		dto.setDeleteAt(post.getDeleteAt());
+		dto.setDeleted(post.getDeleted());
+		if (post.getAuthor() != null) {
+			dto.setAuthor(userConvert.toDto(post.getAuthor()));
+		} else {
+			dto.setAuthor(null);
+		}
+		
+		if (post.getParent() != null) {
+			dto.setParentPost(toDto(post.getParent()));
+		} else {
+			dto.setParentPost(null);
+		}
+		
+		dto.setChildPost(toListDto(post.getPosts()));
+		dto.setCreateAt(post.getCreateAt());
+		dto.setUpdateAt(post.getUpdateAt());
+		dto.setCount(post.getCount());
+
+		String categories = "";
+
+		for (CategoryEntity category : post.getCategories()) {
+			if (categories.isEmpty()) {
+				categories += category.getTitle();
+			} else {
+				categories += ", " + category.getTitle();
+			}
+		}
+		dto.setCategory(categories);
+
+		return dto;
 	}
 
 }

@@ -32,6 +32,10 @@ public class CommentEntity extends BaseEntity {
 	@JoinColumn(name = "post_id")
 	private PostEntity post;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private UserEntity user;
+
 	@Column
 	private String content;
 

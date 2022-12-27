@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CommentMainDto extends BaseDto {
 	private Long postId;
+	private UserDto user;
 	private String content;
 	private Boolean status;
 	private Boolean deleted;

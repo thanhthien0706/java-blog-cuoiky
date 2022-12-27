@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostShowHomeDto extends BaseDto {
 	private String title;
+	private String slug;
 	private String avatar;
 	private String category;
 	private Long count;

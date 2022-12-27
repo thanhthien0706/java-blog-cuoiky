@@ -25,7 +25,7 @@
                     <div class="trend-top-cap">
                       <span th:text="${postCount1Top.category}"></span>
                       <h2>
-                        <a href="details.html" th:text="${postCount1Top.title}">
+                        <a th:href="@{'/bai-viet/' + ${postCount1Top.slug}}"  th:text="${postCount1Top.title}">
                         </a>
                       </h2>
                     </div>
@@ -45,7 +45,7 @@
                             th:text="${post.category}"
                           ></span>
                           <h4>
-                            <a href="details.html" th:text="${#strings.abbreviate(post.title,50)}"
+                            <a th:text="${#strings.abbreviate(post.title,50)}"
                               >Get the Illusion of Fuller Lashes by “Mascng.”</a
                             >
                           </h4>

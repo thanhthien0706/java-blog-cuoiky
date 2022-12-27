@@ -2,6 +2,7 @@ package com.thanhthien.cuoiki.services;
 
 import java.util.List;
 
+import com.thanhthien.cuoiki.dto.PostDetailDto;
 import com.thanhthien.cuoiki.dto.PostEditDto;
 import com.thanhthien.cuoiki.dto.PostShowDto;
 import com.thanhthien.cuoiki.dto.PostShowHomeDto;
@@ -29,5 +30,7 @@ public interface IPostService {
 	List<PostShowHomeDto> getPostsCount(int limit);
 
 	List<PostShowHomeDto> getPostWithCatogryAndLimit(Long idCategory, int limit);
+
+	PostDetailDto getPostDetailWithSlug(String slug);
 
 }

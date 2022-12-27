@@ -50,4 +50,7 @@ public class UserEntity extends BaseEntity {
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
 	private List<PostEntity> posts;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<CommentEntity> comments;
 }
