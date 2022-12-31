@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{person/mainLayout}">
+<head>
+<meta charset="UTF-8">
+<!-- - $LAYOUT_TITLE -->
+<title layout:title-pattern="$CONTENT_TITLE">Bài viết</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<h2 class="font-weight-bold">Quản lí bài viết</h2>
+
+		<div class="text-right mb-4" style="text-align: end">
+			<a class="btn btn-primary" href="/nguoi-dung/bai-viet/t">Thêm vài
+				viết</a>
+		</div>
+
+		<h5 class="font-weight-bold">Bài viết đã kiểm duyệt</h5>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Ảnh</th>
+					<th scope="col">Tiêu đề</th>
+					<th scope="col">Trạng thái</th>
+					<th scope="col">Bình luận</th>
+					<th scope="col">TG tạo</th>
+					<th scope="col">Xử lý</th>
+				</tr>
+			</thead>
+		</table>
+
+		<h5 class="font-weight-bold mt-5">Bài viết chưa kiểm duyệt</h5>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Ảnh</th>
+					<th scope="col">Tiêu đề</th>
+					<th scope="col">Trạng thái</th>
+					<th scope="col">Bình luận</th>
+					<th scope="col">TG tạo</th>
+					<th scope="col">Xử lý</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</body>
+</html>

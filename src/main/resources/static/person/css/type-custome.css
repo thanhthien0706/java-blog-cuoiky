@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.header-custom {
+	/* 	background-color: #fff !important; */
+	
+}
+
+.nav-custom {
+	padding-top: 20px !important;
+	background-color: rgba(252,73,2,0.4) !important;
+	color: #363738 !important;
+}
+
+.nav-custom .boxInforUser {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.nav-custom .boxInforUser .imgUser {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	margin-bottom: 10px;
+}
+
+.nav-custom .boxInforUser .nameUser {
+	font-size: 16px;
+	font-weight: bold;
+	color: #363738;
+}

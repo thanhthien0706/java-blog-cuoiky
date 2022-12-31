@@ -34,6 +34,7 @@
 											href="/dang-xuat">Đăng xuất</a></li>
 										<li sec:authorize="hasRole('ADMIN')"><a href="/admin/home">Tới
 												trang admin</a></li>
+										<li sec:authorize="hasRole('USER')"><a th:href="@{'/nguoi-dung/' + ${#authentication.getPrincipal().getUsername()}}" th:text ="${#authentication.getPrincipal().getUsername()}">Ten nguoi dung</a></li>
 									</ul>
 								</div>
 							</div>

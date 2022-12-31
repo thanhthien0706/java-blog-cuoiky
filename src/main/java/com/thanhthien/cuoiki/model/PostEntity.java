@@ -62,6 +62,9 @@ public class PostEntity extends BaseEntity {
 	private StatusPost status;
 
 	@Column
+	private Boolean action = Boolean.FALSE;
+
+	@Column
 	private Long count = 0l;
 
 	@Column

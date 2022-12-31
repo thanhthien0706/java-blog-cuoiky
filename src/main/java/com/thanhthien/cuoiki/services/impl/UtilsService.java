@@ -17,14 +17,14 @@ public class UtilsService implements IUtilsService {
 
 	private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
 	private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
-	
+
 	@Override
 	public Long getIdUserCurrent() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		CustomUserDetails customUser = (CustomUserDetails) authentication.getPrincipal();
 		return customUser.getId();
 	}
-	
+
 	@Override
 	public String convertSlug(String title) {
 		String nowhitespace = WHITESPACE.matcher(title).replaceAll("-");

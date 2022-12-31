@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+</head>
+<body>
+	<nav th:fragment="navigation"
+		class="nav-custom sb-sidenav accordion sb-sidenav-dark"
+		id="sidenavAccordion">
+		<div class="sb-sidenav-menu">
+
+			<div class="boxInforUser">
+				<img alt=""
+					src="https://img.meta.com.vn/Data/image/2022/01/13/anh-dep-thien-nhien-3.jpg"
+					class="imgUser">
+				<p class="nameUser">Thành Thiện</p>
+			</div>
+
+			<div class="nav">
+				<a class="nav-link"
+					th:href="@{'/nguoi-dung/' + ${#authentication.getPrincipal().getUsername()}} + '/bai-viet'">
+					<div class="sb-nav-link-icon">
+						<i class="fas fa-tachometer-alt"></i>
+					</div> Bài viết
+				</a> 
+				<a class="nav-link" href="/admin/post">
+					<div class="sb-nav-link-icon">
+						<i class="fas fa-blog"></i>
+					</div> Bình luận
+				</a> 
+				<a class="nav-link" href="/trang-chu">
+					<div class="sb-nav-link-icon">
+						<i class="fas fa-arrow-left"></i>
+					</div> Trở lại trang chủ
+				</a>
+
+
+			</div>
+		</div>
+	</nav>
+</body>
+</html>
