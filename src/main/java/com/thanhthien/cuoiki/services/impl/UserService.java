@@ -3,8 +3,14 @@ package com.thanhthien.cuoiki.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.thanhthien.cuoiki.converts.UserConvert;
+import com.thanhthien.cuoiki.dto.UserDto;
 import com.thanhthien.cuoiki.form.SignupForm;
+import com.thanhthien.cuoiki.form.UpdateAvatarForm;
+import com.thanhthien.cuoiki.form.UpdateInforUser;
+import com.thanhthien.cuoiki.form.UpdatePassForm;
 import com.thanhthien.cuoiki.model.RoleEnity;
 import com.thanhthien.cuoiki.model.UserEntity;
 import com.thanhthien.cuoiki.repository.RoleRepository;
@@ -22,6 +28,12 @@ public class UserService implements IUserService {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
+
+	@Autowired
+	StorageService storageService;
+
+	@Autowired
+	UserConvert userConvert;
 
 	@Override
 	public UserEntity findByUserName(String username) {
@@ -66,6 +78,82 @@ public class UserService implements IUserService {
 
 	public String getTest() {
 		return "Vao dduowcj nha";
+	}
+
+	@Override
+	public String updateAvatar(UpdateAvatarForm updateAvatarForm) {
+
+		if (!updateAvatarForm.getAvatar().isEmpty()) {
+			UserEntity oldUser = userRepository.findOneById(updateAvatarForm.getIdUser());
+
+			if (oldUser == null) {
+				return null;
+			}
+			String avatar = storageService.storageFile(updateAvatarForm.getAvatar());
+
+			oldUser.setAvatar(avatar);
+
+			userRepository.save(oldUser);
+
+			return avatar;
+		}
+
+		return null;
+	}
+
+	@Override
+	public Boolean updateInforUser(UpdateInforUser updateInforUser) {
+
+		System.out.println("User update " + updateInforUser.getFullName());
+		Boolean check = false;
+
+		UserEntity oldUser = userRepository.findOneById(updateInforUser.getIdUser());
+
+		if (oldUser == null) {
+			return null;
+		}
+
+		oldUser.setFullName(updateInforUser.getFullName());
+
+		UserEntity newUser = userRepository.save(oldUser);
+
+		if (newUser == null) {
+			return null;
+		}
+		check = true;
+
+		return check;
+	}
+
+	@Override
+	public UserDto getUserByUsername(String username) {
+		UserEntity user = userRepository.findOneByUserName(username);
+
+		if (user == null) {
+			return null;
+		}
+
+		UserDto dto = userConvert.toDto(user);
+		return dto;
+	}
+
+	@Override
+	public void updatePasswordById(UpdatePassForm updatePassForm) {
+		UserEntity oldUser = userRepository.findOneById(updatePassForm.getIdUser());
+
+		if (oldUser != null) {
+			Boolean checkPass = passwordEncoder.matches(updatePassForm.getOldPassword(), oldUser.getPassword());
+
+			System.out.println("so sanh pass " + checkPass);
+
+			if (checkPass) {
+				oldUser.setPassword(passwordEncoder.encode(updatePassForm.getNewPassword()));
+
+				userRepository.save(oldUser);
+
+			}
+		}
+
 	}
 
 }

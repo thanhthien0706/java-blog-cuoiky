@@ -129,11 +129,11 @@ public class PostService implements IPostService {
 		StatusPost statusPost = StatusPost.PUBLIC;
 		List<PostEntity> posts;
 
-		if (status == "PUBLIC") {
+		if (status.equals("PUBLIC")) {
 			posts = postRepository.findAllByStatus(StatusPost.PUBLIC);
-		} else if (status == "UNPUBLIC") {
+		} else if (status.equals("UNPUBLIC")) {
 			posts = postRepository.findAllByStatus(StatusPost.UNPUBLIC);
-		} else if (status == "DRAFT") {
+		} else if (status.equals("DRAFT")) {
 			posts = postRepository.findAllByStatus(StatusPost.DRAFT);
 		} else {
 			posts = postRepository.findAllByOrderByCreateAtDesc();
@@ -208,7 +208,7 @@ public class PostService implements IPostService {
 
 		oldPost.setCategories(categories);
 
-		if (postEditForm.getAvatar() != null) {
+		if (!postEditForm.getAvatar().isEmpty()) {
 			String avatar = storageService.storageFile(postEditForm.getAvatar());
 
 			if (avatar == null) {
@@ -281,6 +281,33 @@ public class PostService implements IPostService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public List<PostShowDto> getPostsWithActionAndIdAuthor(Boolean action, Long idAuthor) {
+
+		List<PostEntity> posts = postRepository.findAllByActionAndAuthorId(action, idAuthor);
+
+		if (posts == null) {
+			return null;
+		}
+
+		List<PostShowDto> postDtos = postConvert.toListDtoShow(posts);
+
+		return postDtos;
+	}
+
+	@Override
+	public PostEditDto getPostByIdAndAuthorId(Long idPost, Long idAuthor) {
+		PostEntity postOld = postRepository.findOneByIdAndAuthorId(idPost, idAuthor);
+
+		if (postOld == null) {
+			return null;
+		}
+
+		PostEditDto dtoPost = postConvert.toDtoEdit(postOld);
+
+		return dtoPost;
 	}
 
 }

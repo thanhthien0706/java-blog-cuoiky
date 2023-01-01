@@ -17,6 +17,8 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
 	PostEntity findOneById(Long id);
 
+	PostEntity findOneByIdAndAuthorId(Long id, Long authorId);
+
 	List<PostEntity> findAllByOrderByCreateAtDesc();
 
 	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.status = 'PUBLIC' ORDER BY p.count DESC LIMIT :limit")
@@ -29,4 +31,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
 	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.slug = \' + :slug + \' LIMIT 1")
 	PostEntity getOnePostBySlug(String slug);
+
+//	@Query(nativeQuery = true, value = "SELECT * ")
+	List<PostEntity> findAllByActionAndAuthorId(Boolean action, Long idAuthor);
 }

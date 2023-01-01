@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{person/mainLayout}">
+<head>
+<meta charset="UTF-8">
+<!-- - $LAYOUT_TITLE -->
+<title layout:title-pattern="$CONTENT_TITLE"
+	th:text="'Thông tin ' + ${#authentication.getPrincipal().getUsername()}">Thông
+	tin</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<h2 class="font-weight-bold">Thông tin cá nhân</h2>
+
+		<form action="/nguoi-dung/infor" method="post">
+
+			<input name="idUser" type="hidden"
+				th:value="${#authentication.getPrincipal().getId()}"
+				id="idUserCurrent">
+
+			<div class="form-group mb-3">
+				<label for="inputProfileAvatar" class="mr-4">Ảnh đại diện <input
+					type="file" id="inputProfileAvatar" style="display: none">
+					<img id="imgAvatarUpdateUser" alt="" th:src="${user.avatar}"
+					class="ml-3"
+					style="width: 100px; height: 100px; border-radius: 10px; margin-left: 10px; object-fit: cover" />
+				</label>
+			</div>
+
+			<div class="form-group mb-3">
+				<label for="inputFullname">Họ tên</label> <input name="fullName"
+					type="text" class="form-control" id="inputFullname"
+					th:value="${user.fullName}">
+			</div>
+			<div class="form-group mb-3">
+				<label for="inputFullname">Tên tài khoản</label> <input type="text"
+					class="form-control" id="inputFullname" th:value="${user.userName}"
+					disabled="disabled">
+			</div>
+			<div class="form-group mb-3">
+				<label for="inputFullname">Email</label> <input type="text"
+					class="form-control" id="inputFullname" th:value="${user.email}"
+					disabled="disabled">
+			</div>
+			<div class="form-group mb-3 text-center">
+				<button type="submit" class="btn btn-primary">Cập nhật</button>
+			</div>
+		</form>
+
+		<h2 class="font-weight-bold">Bảo mật</h2>
+
+		<form id="formUpdatePass" action="/nguoi-dung/mat-khau" method="post">
+			<input name="idUser" type="hidden"
+				th:value="${#authentication.getPrincipal().getId()}"
+				id="idUserCurrent">
+
+			<div class="form-group mb-3">
+				<label for="inputFullname">Mật khẩu cũ</label> <input
+					name="oldPassword" type="password" class="form-control"
+					id="inputFullname">
+			</div>
+
+			<div class="form-group mb-3">
+				<label for="inputFullname">Mật khẩu mới</label> <input
+					name="newPassword" type="password" class="form-control" id="password">
+			</div>
+
+			<div class="form-group mb-3">
+				<label for="inputFullname">Nhập lại mật khẩu</label> <input
+					type="password" class="form-control" id="confirm_password">
+			</div>
+			<div class="form-group mb-3 text-center">
+				<button type="submit" class="btn btn-primary"
+					id="btnSubmitUpdatePass">Đổi mật khẩu</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

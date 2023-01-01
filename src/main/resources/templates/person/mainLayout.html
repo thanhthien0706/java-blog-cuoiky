@@ -53,6 +53,8 @@
 	<script src="/admin/js/datatables-simple-demo.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 	<script type="text/javascript">
       $(document).ready(function () {
     	  
@@ -60,6 +62,10 @@
     	  const formAddPost = $("#formAddPost");
     	  const formEditPost = $("#formEditPost")
     	  const inputContentEdit = $("#inputContentEdit");
+    	  const userNameCurrent = $("#userNameCurrent");
+    	  const inputProfileAvatar = $("#inputProfileAvatar");
+    	  const idUserCurrent = $("#idUserCurrent");
+    	  const formUpdatePass = $("#formUpdatePass");
     	  
         $("#summernote").summernote({
           placeholder: "Nhập nội dung bài viết",
@@ -83,7 +89,7 @@
         	const markupStr = $('#summernote').summernote('code');
         	inputContent.val(markupStr);
         	
-        	formAddPost.attr("action","/nguoi-dung/bai-viet/t")
+        	formAddPost.attr("action","/nguoi-dung/"+userNameCurrent.val()+"/bai-viet/t")
         	formAddPost.attr("method","post")
         	formAddPost.submit();
         })
@@ -97,10 +103,40 @@
         	
         	const idPost = $("#inputIdEdit").val();
         	
-        	formEditPost.attr("action",`/admin/post/edit/${idPost}`)
+        	formEditPost.attr("action",`/nguoi-dung/${userNameCurrent.val()}/bai-viet/e/${idPost}`)
         	formEditPost.attr("method","post")
         	formEditPost.submit();
         })
+        
+        inputProfileAvatar.change((e)=>{
+        	
+        	const formData = new FormData();
+        	formData.append("avatar", inputProfileAvatar.prop('files')[0])
+        	formData.append("idUser", idUserCurrent.val())
+        	
+        	axios.put("/nguoi-dung/a", formData)
+        	.then(res=>{
+        		if(res.data){
+        			$("#imgAvatarUpdateUser").attr("src", res.data)
+        			$("#imgAvatarUser").attr("src", res.data)
+        		}else{
+        			alert("Không thể cập nhật ảnh đại diện")
+        		}
+        	})
+        	.catch(err=> {
+        		console.log(err);
+        		alert("Không thể cập nhật ảnh đại diện");
+        	})
+        })
+        
+        $("#btnSubmitUpdatePass").prop('disabled', true)
+        
+        $('#password, #confirm_password').on('keyup', function () {
+        	  if ($('#password').val() == $('#confirm_password').val()) {
+        		  $("#btnSubmitUpdatePass").prop('disabled', false);
+        	  } else 
+        		  $("#btnSubmitUpdatePass").prop('disabled', true);
+        });
         
       });
     </script>

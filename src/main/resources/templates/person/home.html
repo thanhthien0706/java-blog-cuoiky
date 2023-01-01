@@ -9,10 +9,13 @@
 </head>
 <body>
 	<div layout:fragment="content" class="container">
+		<input type="hidden"
+			th:value="${#authentication.getPrincipal().getUsername()}"
+			id="userNameCurrent">
 		<h2 class="font-weight-bold">Quản lí bài viết</h2>
 
 		<div class="text-right mb-4" style="text-align: end">
-			<a class="btn btn-primary" href="/nguoi-dung/bai-viet/t">Thêm vài
+			<a class="btn btn-primary" th:href="@{'/nguoi-dung/'+${#authentication.getPrincipal().getUsername()}+'/bai-viet/t'}">Thêm vài
 				viết</a>
 		</div>
 
@@ -28,7 +31,38 @@
 					<th scope="col">TG tạo</th>
 					<th scope="col">Xử lý</th>
 				</tr>
+
 			</thead>
+			<tbody>
+				<tr th:each="post,iter : ${postsTrue}">
+					<th scope="row" style="text-align: center; vertical-align: middle"
+						th:text="${iter.index} + 1"></th>
+					<td style="text-align: center; vertical-align: middle;"><img
+						alt="" th:src="${post.avatar}"
+						style="width: 50px; height: 50px; border-radius: 8px;" /></td>
+					<td th:text="${post.title}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.status}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.countComments}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:if="${post.postParrent}" th:text="${post.postParrent.id}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${#dates.format(post.createAt, 'dd-MM-yyyy')}"
+						style="text-align: center; vertical-align: middle"></td>
+					<!-- th:href="@{/admin/post/edit/${post.id}}" -->
+					<td class="d-flex flex-column"
+						style="text-align: center; vertical-align: middle"><a
+						th:href="@{'/bai-viet/'+ ${post.slug}}"
+						class="btn btn-success mb-2"> <i class="fa-solid fa-eye"></i></a>
+						<a
+						th:href="@{'/nguoi-dung/'+${#authentication.getPrincipal().getUsername()}+'/bai-viet/e/'+ ${post.id}}"
+						class="btn btn-primary mb-2"> <i
+							class="fa-solid fa-pen-to-square"></i></a> <a
+						th:href="@{'/nguoi-dung/'+${#authentication.getPrincipal().getUsername()}+'/bai-viet/d/'+ ${post.id}}"
+						class="btn btn-danger"> <i class="fa-solid fa-trash"></i></a></td>
+				</tr>
+			</tbody>
 		</table>
 
 		<h5 class="font-weight-bold mt-5">Bài viết chưa kiểm duyệt</h5>
@@ -44,6 +78,36 @@
 					<th scope="col">Xử lý</th>
 				</tr>
 			</thead>
+			<tbody>
+				<tr th:each="post,iter : ${postsFalse}">
+					<th scope="row" style="text-align: center; vertical-align: middle"
+						th:text="${iter.index} + 1"></th>
+					<td style="text-align: center; vertical-align: middle;"><img
+						alt="" th:src="${post.avatar}"
+						style="width: 50px; height: 50px; border-radius: 8px;" /></td>
+					<td th:text="${post.title}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.status}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.countComments}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:if="${post.postParrent}" th:text="${post.postParrent.id}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${#dates.format(post.createAt, 'dd-MM-yyyy')}"
+						style="text-align: center; vertical-align: middle"></td>
+					<!-- th:href="@{/admin/post/edit/${post.id}}" -->
+					<td class="d-flex flex-column"
+						style="text-align: center; vertical-align: middle"><a
+						th:href="@{'/bai-viet/'+ ${post.slug}}"
+						class="btn btn-success mb-2"> <i class="fa-solid fa-eye"></i></a>
+						<a
+						th:href="@{'/nguoi-dung/'+${#authentication.getPrincipal().getUsername()}+'/bai-viet/e/'+ ${post.id}}"
+						class="btn btn-primary mb-2"> <i
+							class="fa-solid fa-pen-to-square"></i></a> <a
+						th:href="@{'/nguoi-dung/'+${#authentication.getPrincipal().getUsername()}+'/bai-viet/d/'+ ${post.id}}"
+						class="btn btn-danger"> <i class="fa-solid fa-trash"></i></a></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </body>

@@ -33,4 +33,11 @@ public class UtilsService implements IUtilsService {
 		return slug.toLowerCase(Locale.ENGLISH);
 	}
 
+	@Override
+	public String getUserNameCurrent() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails customUser = (CustomUserDetails) authentication.getPrincipal();
+		return customUser.getUsername();
+	}
+
 }

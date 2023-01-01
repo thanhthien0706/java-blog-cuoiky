@@ -19,7 +19,11 @@ public interface IPostService {
 
 	List<PostShowDto> getPostsWithStatus(String status);
 
+	List<PostShowDto> getPostsWithActionAndIdAuthor(Boolean action, Long idAuthor);
+
 	PostEditDto getPostById(Long id);
+
+	PostEditDto getPostByIdAndAuthorId(Long idPost, Long idAuthor);
 
 	PostEntity updatePost(PostEditForm postEditForm);
 

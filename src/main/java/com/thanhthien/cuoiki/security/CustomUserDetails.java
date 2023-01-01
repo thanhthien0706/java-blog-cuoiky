@@ -27,6 +27,10 @@ public class CustomUserDetails implements UserDetails {
 		return Arrays.asList(authority);
 	}
 
+	public String getAvatar() {
+		return user.getAvatar();
+	}
+
 	@Override
 	public String getPassword() {
 		return user.getPassword();
