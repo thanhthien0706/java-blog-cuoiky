@@ -104,7 +104,6 @@ public class UserService implements IUserService {
 	@Override
 	public Boolean updateInforUser(UpdateInforUser updateInforUser) {
 
-		System.out.println("User update " + updateInforUser.getFullName());
 		Boolean check = false;
 
 		UserEntity oldUser = userRepository.findOneById(updateInforUser.getIdUser());
@@ -143,8 +142,6 @@ public class UserService implements IUserService {
 
 		if (oldUser != null) {
 			Boolean checkPass = passwordEncoder.matches(updatePassForm.getOldPassword(), oldUser.getPassword());
-
-			System.out.println("so sanh pass " + checkPass);
 
 			if (checkPass) {
 				oldUser.setPassword(passwordEncoder.encode(updatePassForm.getNewPassword()));

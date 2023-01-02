@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{person/mainLayout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- - $LAYOUT_TITLE -->
+    <title layout:title-pattern="$CONTENT_TITLE">Bình luận</title>
+  </head>
+  <body>
+    <div layout:fragment="content" class="container">
+      <input
+        type="hidden"
+        th:value="${#authentication.getPrincipal().getUsername()}"
+        id="userNameCurrent"
+      />
+
+      <h2 class="font-weight-bold">Quản lí bình luận</h2>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Hiển thị</th>
+            <th scope="col">Người bình luận</th>
+            <th scope="col">Nội dung</th>
+            <th scope="col">Bài viết</th>
+            <th scope="col">TG tạo</th>
+            <th scope="col">Xử lý</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="comment,iter : ${comments}">
+            <input
+              type="hidden"
+              th:value="${comment.postId}"
+              id="idPostInComment"
+            />
+
+            <th style="vertical-align: middle" th:text="${iter.index} + 1">
+              1
+            </th>
+            <td style="vertical-align: middle">
+              <button
+                type="button"
+                class="btnHandleStatusComment btn btn-danger btn-sm"
+                th:if="${comment.status}"
+                data-comment_status="1"
+                th:attr="data-comment_id=${comment.id}"
+              >
+                Bỏ duyệt
+              </button>
+              <button
+                type="button"
+                class="btnHandleStatusComment btn btn-primary btn-sm"
+                th:unless="${comment.status}"
+                data-comment_status="0"
+                th:attr="data-comment_id=${comment.id}"
+              >
+                Duyệt
+              </button>
+            </td>
+            <td
+              style="vertical-align: middle"
+              th:text="${comment.user.fullName}"
+            >
+              Nguoi binh luan
+            </td>
+            <td style="vertical-align: middle">
+              <p th:text="${comment.content}">Bài viết hay qua nen hehe</p>
+
+              <textarea name="" id="" rows="3"></textarea><br />
+              <button type="button" class="btn btn-success btn-sm">
+                Trả lời
+              </button>
+            </td>
+            <td style="vertical-align: middle">
+              <a
+                th:href="@{'/bai-viet/' + ${comment.postSlug}}"
+                th:text="${comment.postName}"
+                >Apple cho thành thiện mọt chiếc điện thoại</a
+              >
+            </td>
+            <td
+              style="vertical-align: middle"
+              th:text="${#dates.format(comment.createAt, 'DD-MM-yyyy')}"
+            >
+              07-06-2023
+            </td>
+            <td style="vertical-align: middle">
+              <div class="d-flex flex-column">
+                <a class="btn btn-danger btn-sm">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

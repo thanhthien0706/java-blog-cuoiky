@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.thanhthien.cuoiki.converts.CommentConvert;
 import com.thanhthien.cuoiki.dto.CommentMainDto;
 import com.thanhthien.cuoiki.form.CommentCreateForm;
+import com.thanhthien.cuoiki.form.CommentUpdateAcceptForm;
 import com.thanhthien.cuoiki.model.CommentEntity;
 import com.thanhthien.cuoiki.model.PostEntity;
 import com.thanhthien.cuoiki.repository.CommentRepository;
@@ -66,6 +67,36 @@ public class CommentService implements ICommentService {
 		CommentMainDto dto = commentConvert.toDto(commentEntity);
 
 		return dto;
+	}
+
+	@Override
+	public List<CommentMainDto> getAllCommentWithAuthorId(Long idAuthor) {
+
+		List<CommentEntity> comments = commentRepository.getAllByAuthorId(idAuthor);
+
+		if (comments == null) {
+			return null;
+		}
+
+		List<CommentMainDto> dtos = commentConvert.toListDto(comments);
+
+		return dtos;
+	}
+
+	@Override
+	public CommentMainDto updateStatusComment(CommentUpdateAcceptForm commentUpdateAcceptForm) {
+
+		CommentEntity oldComment = commentRepository.findOneById(commentUpdateAcceptForm.getCommentId());
+
+		if (oldComment == null) {
+			return null;
+		}
+
+		oldComment.setStatus(commentUpdateAcceptForm.getCommentStatus());
+
+		CommentEntity newComment = commentRepository.save(oldComment);
+
+		return commentConvert.toDto(newComment);
 	}
 
 }

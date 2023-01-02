@@ -23,11 +23,18 @@
 						<i class="fas fa-tachometer-alt"></i>
 					</div> Bài viết
 				</a> <a class="nav-link"
+					th:href="@{'/nguoi-dung/'+${#authentication.getPrincipal().getUsername()}+'/binh-luan'}">
+					<div class="sb-nav-link-icon">
+						<i class="fas fa-comment"></i>
+					</div> Bình luận
+				</a> 
+				<a class="nav-link"
 					th:href="@{'/nguoi-dung/p/'+${#authentication.getPrincipal().getUsername()}}">
 					<div class="sb-nav-link-icon">
 						<i class="fas fa-user"></i>
 					</div> Thông tin
-				</a> <a class="nav-link" href="/trang-chu">
+				</a> 
+				<a class="nav-link" href="/trang-chu">
 					<div class="sb-nav-link-icon">
 						<i class="fas fa-arrow-left"></i>
 					</div> Trở lại trang chủ

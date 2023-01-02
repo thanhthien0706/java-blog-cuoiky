@@ -32,7 +32,10 @@ public class CommentConvert {
 	public CommentMainDto toDto(CommentEntity comment) {
 		CommentMainDto dto = new CommentMainDto();
 
+		dto.setId(comment.getId());
 		dto.setPostId(comment.getPost().getId());
+		dto.setPostName(comment.getPost().getTitle());
+		dto.setPostSlug(comment.getPost().getSlug());
 		dto.setUser(userConvert.toDto(comment.getUser()));
 		dto.setContent(comment.getContent());
 		dto.setStatus(comment.getStatus());
@@ -53,4 +56,5 @@ public class CommentConvert {
 
 		return dtos;
 	}
+
 }
