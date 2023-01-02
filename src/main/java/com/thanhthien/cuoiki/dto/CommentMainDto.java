@@ -1,6 +1,7 @@
 package com.thanhthien.cuoiki.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +19,5 @@ public class CommentMainDto extends BaseDto {
 	private Boolean status;
 	private Boolean deleted;
 	private Date deleteAt;
+	private List<CommentMainDto> commentChilds;
 }

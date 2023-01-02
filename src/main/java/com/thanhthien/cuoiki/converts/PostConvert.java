@@ -118,7 +118,9 @@ public class PostConvert {
 		dto.setStatus(post.getStatus().name());
 		dto.setDeleteAt(post.getDeleteAt());
 		dto.setDeleted(post.getDeleted());
-		dto.setCountComments(post.getComments().size());
+		if (post.getComments() != null) {
+			dto.setCountComments(post.getComments().size());
+		}
 		dto.setCategories(categoryConvert.toListDto(post.getCategories()));
 		dto.setId(post.getId());
 		dto.setCreateAt(post.getCreateAt());
@@ -216,13 +218,13 @@ public class PostConvert {
 		} else {
 			dto.setAuthor(null);
 		}
-		
+
 		if (post.getParent() != null) {
 			dto.setParentPost(toDto(post.getParent()));
 		} else {
 			dto.setParentPost(null);
 		}
-		
+
 		dto.setChildPost(toListDto(post.getPosts()));
 		dto.setCreateAt(post.getCreateAt());
 		dto.setUpdateAt(post.getUpdateAt());

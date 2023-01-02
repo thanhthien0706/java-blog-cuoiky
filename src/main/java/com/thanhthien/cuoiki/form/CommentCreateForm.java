@@ -12,4 +12,5 @@ public class CommentCreateForm {
 	private String slug;
 	private Long idUser;
 	private String content;
+	private Long idCommentParent;
 }

@@ -160,7 +160,6 @@
           const commentStatus = $(this).data("comment_status");
           const commentId = $(this).data("comment_id");
           const postId = $("#idPostInComment").val();
-          const userNameCurrent = $("#userNameCurrent").val();
 
           let status;
 
@@ -176,7 +175,7 @@
           formData.append("postId", postId);
 
           axios
-            .put(`/nguoi-dung/${userNameCurrent}/binh-luan/duyet`, formData)
+            .put(`/nguoi-dung/${userNameCurrent.val()}/binh-luan/duyet`, formData)
             .then((data) => {
               if (data.data) {
                 if (commentStatus == "1") {
@@ -193,6 +192,31 @@
               }
             })
             .catch((err) => console.log(err));
+        });
+        
+        $(".btnReplyComment").click(function(){
+        	const elBtn = this;
+        	const commentParentId = $(this).data("comment_id");
+        	const postId = $("#idPostInComment").val();
+        	const commentIndex = $(this).data("comment_index");
+        	const content = $($(".contentReplyComment")[commentIndex]).val();
+        	
+        	const formData = new FormData();
+        	formData.append("idPost", postId);
+        	formData.append("content", content);
+        	formData.append("idCommentParent", commentParentId);
+        	
+            axios
+	            .post(`/nguoi-dung/${userNameCurrent.val()}/binh-luan/reply`, formData)
+	            .then((data) => {
+	            	$($(".contentReplyComment")[commentIndex]).val("");
+	            	$($(".listCommentReply")[commentIndex]).append(`
+	                        <li >
+		                        <p>${data.data.content}</p>
+		                     </li>
+	            			`)
+	            })
+	            .catch((err) => console.log(err));
         });
       });
     </script>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.thanhthien.cuoiki.model.EnumType.StatusPost;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +38,10 @@ public class CommentEntity extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
 
+	@ManyToOne
+	@JoinColumn(name = "parent_id")
+	private CommentEntity commentParent;
+
 	@Column
 	private String content;
 
@@ -47,4 +53,7 @@ public class CommentEntity extends BaseEntity {
 
 	@Column
 	private Date deleteAt;
+
+	@OneToMany(mappedBy = "commentParent", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CommentEntity> comments;
 }

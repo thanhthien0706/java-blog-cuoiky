@@ -17,7 +17,7 @@ public interface IPostService {
 
 	String convertSlug(String title);
 
-	List<PostShowDto> getPostsWithStatus(String status);
+	List<PostShowDto> getPostsWithStatus(String status, Boolean action);
 
 	List<PostShowDto> getPostsWithActionAndIdAuthor(Boolean action, Long idAuthor);
 
@@ -36,5 +36,7 @@ public interface IPostService {
 	List<PostShowHomeDto> getPostWithCatogryAndLimit(Long idCategory, int limit);
 
 	PostDetailDto getPostDetailWithSlug(String slug);
+
+	void censorPost(Long idPost, Boolean action);
 
 }

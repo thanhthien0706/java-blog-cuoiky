@@ -124,7 +124,7 @@ public class PostService implements IPostService {
 	}
 
 	@Override
-	public List<PostShowDto> getPostsWithStatus(String status) {
+	public List<PostShowDto> getPostsWithStatus(String status, Boolean action) {
 
 		StatusPost statusPost = StatusPost.PUBLIC;
 		List<PostEntity> posts;
@@ -136,7 +136,8 @@ public class PostService implements IPostService {
 		} else if (status.equals("DRAFT")) {
 			posts = postRepository.findAllByStatus(StatusPost.DRAFT);
 		} else {
-			posts = postRepository.findAllByOrderByCreateAtDesc();
+//			OrderByCreateAtDesc
+			posts = postRepository.findByActionOrderByCreateAtDesc(action);
 		}
 
 		List<PostShowDto> postShows = postConvert.toListDtoShow(posts);
@@ -308,6 +309,15 @@ public class PostService implements IPostService {
 		PostEditDto dtoPost = postConvert.toDtoEdit(postOld);
 
 		return dtoPost;
+	}
+
+	@Override
+	public void censorPost(Long idPost, Boolean action) {
+		PostEntity post = postRepository.findOneById(idPost);
+
+		post.setAction(action);
+
+		postRepository.save(post);
 	}
 
 }

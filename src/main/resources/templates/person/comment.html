@@ -71,10 +71,27 @@
               Nguoi binh luan
             </td>
             <td style="vertical-align: middle">
-              <p th:text="${comment.content}">Bài viết hay qua nen hehe</p>
+              <ul class="listCommentReply">
+                <li>
+                  <p th:text="${comment.content}">Bài viết hay qua nen hehe</p>
+                </li>
+                <li th:each="child : ${comment.commentChilds}">
+                  <p th:text="${child.content}"></p>
+                </li>
+              </ul>
 
-              <textarea name="" id="" rows="3"></textarea><br />
-              <button type="button" class="btn btn-success btn-sm">
+              <textarea
+                class="contentReplyComment"
+                name=""
+                id=""
+                rows="3"
+              ></textarea
+              ><br />
+              <button
+                type="button"
+                class="btnReplyComment btn btn-success btn-sm"
+                th:attr="data-comment_id=${comment.id}, data-comment_index=${iter.index}"
+              >
                 Trả lời
               </button>
             </td>
@@ -93,7 +110,10 @@
             </td>
             <td style="vertical-align: middle">
               <div class="d-flex flex-column">
-                <a class="btn btn-danger btn-sm">
+                <a
+                  th:href="@{'/nguoi-dung/' + ${#authentication.getPrincipal().getUsername()} + '/binh-luan/d/' + ${comment.id}}"
+                  class="btn btn-danger btn-sm"
+                >
                   <i class="fa-solid fa-trash"></i>
                 </a>
               </div>

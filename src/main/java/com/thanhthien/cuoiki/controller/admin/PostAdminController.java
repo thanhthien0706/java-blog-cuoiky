@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thanhthien.cuoiki.converts.PostConvert;
@@ -43,10 +44,12 @@ public class PostAdminController {
 
 	@GetMapping("/post")
 	private ModelAndView getPagePost() {
-		List<PostShowDto> posts = postService.getPostsWithStatus("ALL");
+		List<PostShowDto> posts = postService.getPostsWithStatus("ALL", Boolean.FALSE);
+		List<PostShowDto> postsTrue = postService.getPostsWithStatus("ALL", Boolean.TRUE);
 
 		ModelAndView mav = new ModelAndView("admin/posts.html");
 		mav.addObject("posts", posts);
+		mav.addObject("postsTrue", postsTrue);
 		return mav;
 	}
 
@@ -100,6 +103,15 @@ public class PostAdminController {
 	private ModelAndView getPostById(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("admin/post.html");
 		return mav;
+	}
+
+	@GetMapping("/post/censor")
+	private String censorPost(@RequestParam(name = "idPost") Long idPost,
+			@RequestParam(name = "action") Boolean action) {
+
+		postService.censorPost(idPost, action);
+
+		return "redirect:/admin/post";
 	}
 
 }

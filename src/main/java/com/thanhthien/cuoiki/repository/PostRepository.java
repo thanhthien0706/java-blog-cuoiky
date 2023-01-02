@@ -20,6 +20,8 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 	PostEntity findOneByIdAndAuthorId(Long id, Long authorId);
 
 	List<PostEntity> findAllByOrderByCreateAtDesc();
+	
+	List<PostEntity> findByActionOrderByCreateAtDesc(Boolean action);
 
 	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.status = 'PUBLIC' ORDER BY p.count DESC LIMIT :limit")
 	List<PostEntity> getPostOrderCountWithLimit(int limit);

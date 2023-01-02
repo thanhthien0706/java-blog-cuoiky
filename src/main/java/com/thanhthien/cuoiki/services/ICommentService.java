@@ -14,4 +14,8 @@ public interface ICommentService {
 	List<CommentMainDto> getAllCommentWithAuthorId(Long idAuthor);
 
 	CommentMainDto updateStatusComment(CommentUpdateAcceptForm commentUpdateAcceptForm);
+
+	CommentMainDto createCommentReply(CommentCreateForm commentCreateForm);
+
+	void deleteCommentById(Long idComment);
 }

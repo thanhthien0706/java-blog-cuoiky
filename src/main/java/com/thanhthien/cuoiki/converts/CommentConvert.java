@@ -33,6 +33,9 @@ public class CommentConvert {
 		CommentMainDto dto = new CommentMainDto();
 
 		dto.setId(comment.getId());
+		if (comment.getComments() != null) {
+			dto.setCommentChilds(toListDto(comment.getComments()));
+		}
 		dto.setPostId(comment.getPost().getId());
 		dto.setPostName(comment.getPost().getTitle());
 		dto.setPostSlug(comment.getPost().getSlug());

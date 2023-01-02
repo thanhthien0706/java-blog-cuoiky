@@ -2,6 +2,8 @@ package com.thanhthien.cuoiki.services.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +99,32 @@ public class CommentService implements ICommentService {
 		CommentEntity newComment = commentRepository.save(oldComment);
 
 		return commentConvert.toDto(newComment);
+	}
+
+	@Override
+	public CommentMainDto createCommentReply(CommentCreateForm commentCreateForm) {
+		CommentEntity commentEntity = commentConvert.toEntity(commentCreateForm);
+		commentEntity.setPost(postRepository.findOneById(commentCreateForm.getIdPost()));
+		commentEntity.setUser(userRepository.findOneById(commentCreateForm.getIdUser()));
+		commentEntity.setCommentParent(commentRepository.findOneById(commentCreateForm.getIdCommentParent()));
+
+		commentEntity = commentRepository.save(commentEntity);
+
+		if (commentEntity == null) {
+			return null;
+		}
+
+		CommentMainDto dto = commentConvert.toDto(commentEntity);
+
+		return dto;
+	}
+
+	@Transactional
+	@Override
+	public void deleteCommentById(Long idComment) {
+		
+		commentRepository.deleteById(idComment);
+		commentRepository.onDeleteByCommentParentId(idComment);
 	}
 
 }
