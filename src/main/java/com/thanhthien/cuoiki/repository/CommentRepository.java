@@ -27,7 +27,10 @@ public interface CommentRepository extends CrudRepository<CommentEntity, Long> {
 	@Modifying
 	@Query(nativeQuery = true, value = "DELETE FROM db_comments c WHERE c.parent_id = :idParentComent")
 	void onDeleteByCommentParentId(Long idParentComent);
-		
+
 //	void deleteAllByCommentParentId(Long idParentComent);
+
+	@Query(nativeQuery = true, value = "SELECT * FROM db_comments c ORDER BY c.create_at DESC LIMIT :limit")
+	List<CommentEntity> getNewCommentLimit(int limit);
 
 }

@@ -19,6 +19,8 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet" />
+
+<link href="/admin/css/main-style.css" rel="stylesheet" />
 </head>
 
 <body class="sb-nav-fixed">
@@ -52,6 +54,9 @@
 	<script src="/admin/js/datatables-simple-demo.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 	<script type="text/javascript">
       $(document).ready(function () {
     	  
@@ -102,6 +107,62 @@
         	formEditPost.attr("method","post")
         	formEditPost.submit();
         })
+        
+        $(".btnHandleActiveUser").click(function(){
+            const elBtn = this;
+            const userStatus = $(this).data("user_status");
+            const userId = $(this).data("user_id");
+            
+            const formData = new FormData();
+            formData.append("idUser", userId);
+            if(userStatus){
+            	formData.append("active", false);
+            }else{
+            	formData.append("active", true);
+            }
+            
+            axios.put("/admin/users/active",formData )
+            	.then(data=>{
+                    if (data.data) {
+                        if (userStatus) {
+                          $(elBtn)
+                            .removeClass("btn-danger")
+                            .addClass("btn-primary")
+                            .text("Bỏ chặn").data("user_status" , false);
+                        } else {
+                          $(elBtn)
+                            .removeClass("btn-primary")
+                            .addClass("btn-danger")
+                            .text("Chặn").data("user_status" , true);
+                        }
+                      }
+            	})
+            	.catch(err=>{
+            		console.log(err);
+            	})
+            
+        });
+        
+        const myChart = document.getElementById('myChart');
+        
+        new Chart(myChart, {
+            type: 'bar',
+            data: {
+              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+              datasets: [{
+                label: 'posts',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
         
       });
     </script>

@@ -18,12 +18,15 @@ public class UserConvert extends BaseEntity {
 	public UserDto toDto(UserEntity user) {
 		UserDto dto = new UserDto();
 
+		dto.setId(user.getId());
 		dto.setFullName(user.getFullName());
 		dto.setUserName(user.getUserName());
 		dto.setAvatar(user.getAvatar());
 		dto.setEmail(user.getEmail());
 		dto.setActive(user.getActive());
 		dto.setRoleName(user.getRole().getName());
+		dto.setCreateAt(user.getCreateAt());
+		dto.setUpdateAt(user.getUpdateAt());
 
 		return dto;
 	}

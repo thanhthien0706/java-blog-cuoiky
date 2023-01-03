@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+.boxMainPage .boxInnerTop {
+	background-color: #212529;
+	width: 100%;
+	border-radius: 10px;
+	padding: 20px 0 0 0;
+	color: #fff;
+}
+
+.boxMainPage .boxInnerTop .listItem {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.boxMainPage .boxInnerTop .listItem .item {
+	transition: all 0.4s;
+	padding: 12px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.boxMainPage .boxInnerTop .listItem .item:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.boxMainPage .boxInnerTop .listItem .item .imgShow {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 10px;
+}
+
+.boxMainPage .boxInnerTop .listItem .item .textName {
+	margin: 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.boxContentInnerRight {
+	
+}
+
+.boxContentInnerRight .listCountInfor {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.boxContentInnerRight .boxInner {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #212529;
+	color: #fff;
+	justify-content: center;
+}
+
+.boxContentInnerRight .boxInner .textCount {
+	font-size: 40px;
+	font-weight: bold;
+	margin: 0;
+	margin-right: 10px;
+}
+
+.boxContentInnerRight .boxInner .textCount .boxChild {
+	
+}
+
+.boxContentInnerRight .boxInner .boxChild .textName {
+	margin: 0;
+	font-size: 18px;
+	margin-bottom: 5px;
+}
+
+.boxContentInnerRight  .boxInner .boxChild .iconCount {
+	font-size: 20px;
+}
+
+.boxInnerChart {
+	background-color: #212529;
+	margin-top: 20px;
+	border-radius: 10px;
+	padding: 10px;
+}

@@ -18,4 +18,8 @@ public interface ICommentService {
 	CommentMainDto createCommentReply(CommentCreateForm commentCreateForm);
 
 	void deleteCommentById(Long idComment);
+
+	List<CommentMainDto> getNewCommentLimit(int limit);
+
+	Long countAllComments();
 }

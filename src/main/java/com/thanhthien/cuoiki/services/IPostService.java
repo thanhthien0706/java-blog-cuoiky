@@ -39,4 +39,8 @@ public interface IPostService {
 
 	void censorPost(Long idPost, Boolean action);
 
+	List<PostShowHomeDto> findPostLimitSort(String sort, int limit);
+
+	Long countAllPost();
+
 }

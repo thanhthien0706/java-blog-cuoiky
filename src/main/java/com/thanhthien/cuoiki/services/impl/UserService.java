@@ -1,5 +1,7 @@
 package com.thanhthien.cuoiki.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -151,6 +153,43 @@ public class UserService implements IUserService {
 			}
 		}
 
+	}
+
+	@Override
+	public List<UserDto> findAllUserByRole(String roleName) {
+		List<UserEntity> users = userRepository.findAllUserWithRoleName(roleName);
+
+		if (users == null) {
+			return null;
+		}
+
+		List<UserDto> dtos = userConvert.toListDto(users);
+
+		return dtos;
+	}
+
+	@Override
+	public Boolean updateActiveUser(Long idUser, Boolean active) {
+		UserEntity oldUser = userRepository.findOneById(idUser);
+
+		if (oldUser == null) {
+			return null;
+		}
+
+		oldUser.setActive(active);
+
+		UserEntity newUser = userRepository.save(oldUser);
+
+		if (newUser != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public Long countAllUser() {
+		return userRepository.countUserbyRoleName("ROLE_USER");
 	}
 
 }

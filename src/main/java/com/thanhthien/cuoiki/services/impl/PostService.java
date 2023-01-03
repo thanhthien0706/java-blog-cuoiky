@@ -320,4 +320,28 @@ public class PostService implements IPostService {
 		postRepository.save(post);
 	}
 
+	@Override
+	public List<PostShowHomeDto> findPostLimitSort(String sort, int limit) {
+		List<PostEntity> posts;
+
+		if (sort.equals("desc")) {
+			posts = postRepository.findPostLimitSortDESC(limit);
+		} else {
+			posts = postRepository.findPostLimitSortASC(limit);
+		}
+
+		if (posts == null) {
+			return null;
+		}
+
+		List<PostShowHomeDto> dtos = postConvert.toListDtoShowHome(posts);
+
+		return dtos;
+	}
+
+	@Override
+	public Long countAllPost() {
+		return postRepository.count();
+	}
+
 }

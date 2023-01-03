@@ -5,9 +5,88 @@
 <head>
 <meta charset="UTF-8">
 <!-- - $LAYOUT_TITLE -->
-<title layout:title-pattern="$CONTENT_TITLE">Trang Chủ ADMIN</title>
+<title layout:title-pattern="$CONTENT_TITLE">Dashboard</title>
 </head>
 <body>
-	<h1 layout:fragment="content">This is Admin Home</h1>
+	<div class="boxMainPage container my-3" layout:fragment="content">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="boxInnerTop mb-3">
+					<h4 class="mb-4"
+						style="padding: 0 10px 10px 10px; margin: 0 !important">Top
+						Post</h4>
+					<ul class="listItem">
+						<li class="item" th:each="post:${postsTop}"><a
+							th:href="@{'/bai-viet/' + ${post.slug}}"
+							style="color: unset; text-decoration: none;">
+								<div class="d-flex align-items-center">
+									<img class="imgShow" alt="" th:src="${post.avatar}">
+									<p class="textName"
+										th:text="${#strings.abbreviate(post.title,40)}">IT kiem
+										tien ti moi thang</p>
+								</div>
+						</a></li>
+					</ul>
+				</div>
+
+				<div class="boxInnerTop">
+					<h4 class="mb-4"
+						style="padding: 0 10px 10px 10px; margin: 0 !important">New
+						Comment</h4>
+					<ul class="listItem">
+						<li class="item" th:each="comment : ${commentNew}">
+							<div class="d-flex align-items-center">
+								<img class="imgShow" alt="" th:src="${comment.user.avatar}">
+								<div class="d-flex flex-column">
+									<p class="textName" th:text="${comment.user.fullName}">Ten nguoi comment</p>
+									<p class="" th:text="${comment.content}" style="margin: 0;">content comment</p>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="boxContentInnerRight">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="boxInner">
+								<p class="textCount text-primary" th:text="${countPost}">30</p>
+								<div class="boxChild">
+									<p class="textName">Posts</p>
+									<i class="fa-solid fa-blog iconCount "></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="boxInner">
+								<p class="textCount text-success" th:text="${countComment}">30</p>
+								<div class="boxChild">
+									<p class="textName">Comments</p>
+									<i class="fa-solid fa-comment iconCount"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="boxInner">
+								<p class="textCount text-warning" th:text="${countUser}">30</p>
+								<div class="boxChild">
+									<p class="textName">Users</p>
+									<i class="fa-solid fa-users iconCount"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="boxInnerChart">
+					<canvas id="myChart"></canvas>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>

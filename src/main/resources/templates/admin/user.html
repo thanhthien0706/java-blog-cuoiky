@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/mainLayout}">
+<head>
+<meta charset="UTF-8">
+<!-- - $LAYOUT_TITLE -->
+<title layout:title-pattern="$CONTENT_TITLE">Manager User</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<h2 class="font-weight-bold mb-5">Users Manager</h2>
+
+		<table class="table table-hover table-dark">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Active</th>
+					<th scope="col">Avatar</th>
+					<th scope="col">User name</th>
+					<th scope="col">Full name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Created at</th>
+					<!-- <th scope="col">Action</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user,iter : ${usersRoleUser}">
+					<th scope="row" style="text-align: center; vertical-align: middle"
+						th:text="${iter.index} + 1">
+					<td style="vertical-align: middle">
+						<button type="button"
+							class="btnHandleActiveUser btn btn-danger btn-sm"
+							th:if="${user.active}"
+							th:attr="data-user_id=${user.id}, data-user_status=${user.active}">Chặn</button>
+						<button type="button"
+							class="btnHandleActiveUser btn btn-primary btn-sm"
+							th:unless="${user.active}"
+							th:attr="data-user_id=${user.id}, data-user_status=${user.active}">Bỏ
+							chặn</button>
+					</td>
+					<td style="text-align: center; vertical-align: middle;"><img
+						alt="" th:src="${user.avatar}"
+						style="width: 50px; height: 50px; border-radius: 8px;" /></td>
+					<td th:text="${user.userName}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${user.fullName}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${user.email}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${#dates.format(user.createAt, 'DD-MM-yyyy')}"
+						style="text-align: center; vertical-align: middle"></td>
+					<!-- <td class="d-flex flex-column"
+						style="text-align: center; vertical-align: middle"><a
+						class="btn btn-primary mb-2 btn-sm"> <i
+							class="fa-solid fa-check"></i></a> <a class="btn btn-danger btn-sm">
+							<i class="fa-solid fa-xmark"></i>
+					</a></td> -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

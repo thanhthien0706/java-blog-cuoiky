@@ -1,5 +1,7 @@
 package com.thanhthien.cuoiki.services;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.thanhthien.cuoiki.dto.UserDto;
@@ -25,4 +27,10 @@ public interface IUserService {
 	UserDto getUserByUsername(String username);
 
 	void updatePasswordById(UpdatePassForm updatePassForm);
+
+	List<UserDto> findAllUserByRole(String roleName);
+
+	Boolean updateActiveUser(Long idUser, Boolean active);
+
+	Long countAllUser();
 }

@@ -122,9 +122,26 @@ public class CommentService implements ICommentService {
 	@Transactional
 	@Override
 	public void deleteCommentById(Long idComment) {
-		
+
 		commentRepository.deleteById(idComment);
 		commentRepository.onDeleteByCommentParentId(idComment);
+	}
+
+	@Override
+	public List<CommentMainDto> getNewCommentLimit(int limit) {
+		List<CommentEntity> comments = commentRepository.getNewCommentLimit(limit);
+
+		if (comments == null) {
+			return null;
+		}
+
+		List<CommentMainDto> dtos = commentConvert.toListDto(comments);
+		return dtos;
+	}
+
+	@Override
+	public Long countAllComments() {
+		return commentRepository.count();
 	}
 
 }
