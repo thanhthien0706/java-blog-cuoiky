@@ -23,10 +23,10 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
 	List<PostEntity> findByActionOrderByCreateAtDesc(Boolean action);
 
-	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.status = 'PUBLIC' ORDER BY p.count DESC LIMIT :limit")
+	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.status = 'PUBLIC' AND p.action = 1 ORDER BY p.count DESC LIMIT :limit")
 	List<PostEntity> getPostOrderCountWithLimit(int limit);
 
-	@Query(nativeQuery = true, value = "SELECT p.* FROM db_posts p JOIN post_category pc ON p.id = pc.post_id WHERE pc.category_id = :idCategory ORDER BY p.count DESC LIMIT :limit")
+	@Query(nativeQuery = true, value = "SELECT p.* FROM db_posts p JOIN post_category pc ON p.id = pc.post_id WHERE pc.category_id = :idCategory AND p.action = 1 ORDER BY p.count DESC LIMIT :limit")
 	List<PostEntity> getPostWithCatogryAndLimit(Long idCategory, int limit);
 
 	PostEntity findOneBySlug(String slug);
