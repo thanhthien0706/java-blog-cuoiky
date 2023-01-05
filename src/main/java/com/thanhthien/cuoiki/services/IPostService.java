@@ -43,4 +43,6 @@ public interface IPostService {
 
 	Long countAllPost();
 
+	List<Long> countPostWithMonth(Long year);
+
 }

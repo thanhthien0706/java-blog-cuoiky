@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -112,6 +114,14 @@ public class PostAdminController {
 		postService.censorPost(idPost, action);
 
 		return "redirect:/admin/post";
+	}
+
+	@GetMapping("/post/count-year/{year}")
+	private ResponseEntity<Object> countsPostByYear(@PathVariable Long year) {
+		List<Long> counts = postService.countPostWithMonth(year);
+		System.out.println(counts);
+
+		return ResponseEntity.status(HttpStatus.OK).body(counts);
 	}
 
 }

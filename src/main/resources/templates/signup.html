@@ -14,39 +14,79 @@
 </head>
 <body>
 
-	<div class="wrapper fadeInDown">
-		<div id="formContent">
-			<!-- Tabs Titles -->
+	<section class="vh-100">
+		<div class="container-fluid h-custom">
+			<div
+				class="row d-flex justify-content-center align-items-center h-100">
 
-			<!-- Icon -->
-			<!-- <div class="fadeIn first">
-				<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon"
-					alt="User Icon" />
-			</div> -->
+				<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+					<form action="/dang-ky" method="post" id="formRegister">
 
-			<!-- Login Form -->
-			<form action="/dang-ky" method="post" id="formRegister">
-				<input type="text" class="fadeIn second" name="fullname"
-					placeholder="Họ tên"> 
-				<input type="text"
-					class="fadeIn second" name="username" placeholder="Tên tài khoản">
-				<input type="text" class="fadeIn second" name="email"
-					placeholder="Email"> 
-				<input type="text" id="password"
-					class="fadeIn third" name="password" placeholder="Mật khẩu">
-				<input type="text" id="re-password" class="fadeIn third"
-					name="re-password" placeholder="Nhập lại mật khẩu"> 
-				<input
-					type="submit" class="fadeIn fourth" value="Đăng ký">
-			</form>
+						<!-- Fullname input -->
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form3Example3">Họ tên</label> <input
+								type="text" id="form3Example3"
+								class="form-control form-control-lg" name="fullname"
+								placeholder="vd:thanhthien" />
+						</div>
 
-			<!-- Remind Passowrd -->
-			<div id="formFooter">
-				<a class="underlineHover" href="/dang-nhap">Đã có tài khoản?</a>
+						<!-- Username input -->
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form3Example3">Tên tài
+								khoản</label> <input type="text" id="form3Example3"
+								class="form-control form-control-lg" name="username"
+								placeholder="vd:thanhthien" />
+						</div>
+
+						<!-- Email input -->
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form3Example3">Email</label> <input
+								type="text" id="form3Example3"
+								class="form-control form-control-lg" name="email"
+								placeholder="vd: abc123@gmail.com" />
+						</div>
+
+						<!-- Password input -->
+						<div class="form-outline mb-3">
+							<label class="form-label" for="password">Mật khẩu</label> <input
+								type="password" name="password" id="password"
+								class="form-control form-control-lg" placeholder="Nhập mật khẩu" />
+						</div>
+
+						<!-- Re-Password input -->
+						<div class="form-outline mb-3">
+							<label class="form-label" for="re-password">Nhập lại mật
+								khẩu</label> <input type="password" name="re-password" id="re-password"
+								class="form-control form-control-lg"
+								placeholder="Nhập lại mật khẩu" />
+						</div>
+
+						<div class="d-flex justify-content-between align-items-center">
+						</div>
+
+						<div class="text-center text-lg-start mt-4 pt-2">
+							<button type="submit" class="btn btn-primary btn-lg"
+								style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng
+								ký</button>
+							<p class=" fw-bold mt-2 pt-1 mb-0">
+								Đã có tài khoản? <a href="/dang-nhap" class="link-danger">Đăng
+									nhập</a>
+							</p>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="col-md-9 col-lg-6 col-xl-5">
+					<a href="/trang-chu"> <img
+						src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+						class="img-fluid" alt="Sample image">
+					</a>
+				</div>
 			</div>
-
 		</div>
-	</div>
+
+	</section>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

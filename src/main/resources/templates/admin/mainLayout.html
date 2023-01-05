@@ -64,6 +64,7 @@
     	  const formAddPost = $("#formAddPost");
     	  const formEditPost = $("#formEditPost")
     	  const inputContentEdit = $("#inputContentEdit");
+    	  const inputYearCountPosts = $("#inputYearCountPosts");
     	  
         $("#summernote").summernote({
           placeholder: "Hello enter conent",
@@ -145,13 +146,14 @@
         
         const myChart = document.getElementById('myChart');
         
-        new Chart(myChart, {
+        
+       const chartPost=  new Chart(myChart, {
             type: 'bar',
             data: {
               labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
               datasets: [{
                 label: 'posts',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [],
                 borderWidth: 1
               }]
             },
@@ -164,7 +166,33 @@
             }
           });
         
+        const nowYear = new Date().getFullYear();
+        showChartCountPosts(chartPost,nowYear);
+        
+        inputYearCountPosts.keyup(function(e){
+            if(e.keyCode == 13)
+            {
+            	showChartCountPosts(chartPost,parseInt(inputYearCountPosts.val()));
+            }
+        });
+        
       });
+      
+      function updateData(chart, data) {
+    	  console.log(chart.data.datasets)
+    	    chart.data.datasets[0].data =data ;
+    	    chart.update();
+    }
+      
+      function showChartCountPosts(chartPost, year){
+    	  console.log("dao vao", year);
+    	  axios.get(`/admin/post/count-year/${year}`)
+      	.then((dataPosts)=>{
+      		updateData(chartPost, dataPosts.data)
+      	})
+      	.catch(err=>console.log(err))
+      }
+      
     </script>
 </body>
 </html>

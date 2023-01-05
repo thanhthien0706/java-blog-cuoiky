@@ -344,4 +344,9 @@ public class PostService implements IPostService {
 		return postRepository.count();
 	}
 
+	@Override
+	public List<Long> countPostWithMonth(Long year) {
+		return postRepository.countPostByYear(year);
+	}
+
 }

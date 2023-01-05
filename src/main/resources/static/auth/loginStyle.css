@@ -1,6 +1,6 @@
-@charset "UTF-8";
+/* @charset "UTF-8";
 
-/* BASIC */
+BASIC
 html {
 	background-color: #56baed;
 }
@@ -27,7 +27,7 @@ h2 {
 	color: #cccccc;
 }
 
-/* STRUCTURE */
+STRUCTURE
 .wrapper {
 	display: flex;
 	align-items: center;
@@ -61,7 +61,7 @@ h2 {
 	border-radius: 0 0 10px 10px;
 }
 
-/* TABS */
+TABS
 h2.inactive {
 	color: #cccccc;
 }
@@ -71,7 +71,7 @@ h2.active {
 	border-bottom: 2px solid #5fbae9;
 }
 
-/* FORM TYPOGRAPHY*/
+FORM TYPOGRAPHY
 input[type=button], input[type=submit], input[type=reset] {
 	background-color: #56baed;
 	border: none;
@@ -138,9 +138,9 @@ input[type=text]:placeholder {
 	color: #cccccc;
 }
 
-/* ANIMATIONS */
+ANIMATIONS
 
-/* Simple CSS3 Fade-in-down Animation */
+Simple CSS3 Fade-in-down Animation
 .fadeInDown {
 	-webkit-animation-name: fadeInDown;
 	animation-name: fadeInDown;
@@ -188,7 +188,7 @@ none;
 }
 }
 
-/* Simple CSS3 Fade-in Animation */
+Simple CSS3 Fade-in Animation
 @-webkit-keyframes fadeIn {from { opacity:0;
 	
 }
@@ -253,7 +253,7 @@ to {
 	animation-delay: 1s;
 }
 
-/* Simple CSS3 Fade-in Animation */
+Simple CSS3 Fade-in Animation
 .underlineHover:after {
 	display: block;
 	left: 0;
@@ -273,11 +273,27 @@ to {
 	width: 100%;
 }
 
-/* OTHERS */
+OTHERS
 *:focus {
 	outline: none;
 }
 
 #icon {
 	width: 60%;
+} */
+.divider:after, .divider:before {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: #eee;
+}
+
+.h-custom {
+	height: calc(100% - 73px);
+}
+
+@media ( max-width : 450px) {
+	.h-custom {
+		height: 100%;
+	}
 }

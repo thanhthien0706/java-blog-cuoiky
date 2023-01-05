@@ -19,6 +19,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
 	PostEntity findOneByIdAndAuthorId(Long id, Long authorId);
 
+	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p WHERE p.action = 1 ORDER BY p.create_at DESC")
 	List<PostEntity> findAllByOrderByCreateAtDesc();
 
 	List<PostEntity> findByActionOrderByCreateAtDesc(Boolean action);
@@ -38,7 +39,10 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
 	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p ORDER BY p.count DESC LIMIT :limit")
 	List<PostEntity> findPostLimitSortDESC(int limit);
-	
+
 	@Query(nativeQuery = true, value = "SELECT * FROM db_posts p ORDER BY p.count ASC LIMIT :limit")
 	List<PostEntity> findPostLimitSortASC(int limit);
+	
+	@Query(nativeQuery =  true, value="SELECT COUNT(*) as num_blogs FROM db_posts p WHERE YEAR(p.create_at) = :year AND p.action = 1 GROUP BY MONTH(p.create_at) ORDER BY MONTH(p.create_at) ASC")
+	List<Long> countPostByYear(Long year);
 }
