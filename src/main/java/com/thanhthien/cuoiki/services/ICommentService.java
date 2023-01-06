@@ -22,4 +22,6 @@ public interface ICommentService {
 	List<CommentMainDto> getNewCommentLimit(int limit);
 
 	Long countAllComments();
+
+	Long countCommentsByIdPost(Long idPost);
 }

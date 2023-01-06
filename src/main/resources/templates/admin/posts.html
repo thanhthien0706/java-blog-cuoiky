@@ -1,168 +1,124 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{admin/mainLayout}"
->
-  <head>
-    <meta charset="UTF-8" />
-    <!-- - $LAYOUT_TITLE -->
-    <title layout:title-pattern="$CONTENT_TITLE">Posts Page</title>
-  </head>
-  <body>
-    <div layout:fragment="content" class="container">
-      <h2 class="font-weight-bold mb-5">Posts Manager</h2>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/mainLayout}">
+<head>
+<meta charset="UTF-8" />
+<!-- - $LAYOUT_TITLE -->
+<title layout:title-pattern="$CONTENT_TITLE">Posts Page</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
 
-<!--       <div class="text-right mb-4" style="text-align: end">
-        <a class="btn btn-primary" href="/admin/post/add">Add Post</a>
-      </div> -->
+
+		<div class="d-flex justify-content-between align-items-center mb-4" style="text-align: end">
+			<h2 class="font-weight-bold mb-5" style="margin: 0">Posts Manager</h2>
+			<a class="btn btn-primary" href="/admin/post/add">Add Post</a>
+		</div>
 
 		<h5 class="font-weight-bold">Post waiting for confirmation</h5>
-      <table class="table table-hover table-dark">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Image</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Status</th>
-            <th scope="col">Comments</th>
-            <th scope="col">Parent</th>
-            <th scope="col">Created at</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="post,iter : ${posts}">
-            <th scope="row" style="text-align: center; vertical-align: middle" th:text="${iter.index} + 1">
-              
-            </th>
-            <td style="text-align: center; vertical-align: middle;">
-              <img
-                alt=""
-                th:src="${post.avatar}"
-                style="
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 8px;
-                "
-              />
-            </td>
-            <td
-              th:text="${post.title}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:text="${post.author.userName}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:text="${post.status}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:text="${post.countComments}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:if="${post.postParrent}"
-              th:text="${post.postParrent.id}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:unless="${post.postParrent}"
-              style="text-align: center; vertical-align: middle"
-            >
-              Not Parrent
-            </td>
-            <td
-            th:text="${#dates.format(post.createAt, 'dd-MM-yyyy')}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-<!-- th:href="@{/admin/post/edit/${post.id}}" -->
-            <td class="d-flex flex-column" style="text-align: center; vertical-align: middle">
-              <a th:href="@{'/admin/post/censor?action=true&idPost='+${post.id}}" class="btn btn-primary mb-2 btn-sm"> <i class="fa-solid fa-check"></i></a>
-              <a th:href="@{'/admin/post/censor?action=false&idPost='+${post.id}}" class="btn btn-danger btn-sm"> <i class="fa-solid fa-xmark"></i> </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <h5 class="font-weight-bold">Post processed</h5>
-            <table class="table table-hover table-dark">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Image</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Status</th>
-            <th scope="col">Comments</th>
-            <th scope="col">Parent</th>
-            <th scope="col">Created at</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="post,iter : ${postsTrue}">
-            <th scope="row" style="text-align: center; vertical-align: middle" th:text="${iter.index} + 1">
-              
-            </th>
-            <td style="text-align: center; vertical-align: middle;">
-              <img
-                alt=""
-                th:src="${post.avatar}"
-                style="
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 8px;
-                "
-              />
-            </td>
-            <td
-              th:text="${post.title}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:text="${post.author.userName}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:text="${post.status}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:text="${post.countComments}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:if="${post.postParrent}"
-              th:text="${post.postParrent.id}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-            <td
-              th:unless="${post.postParrent}"
-              style="text-align: center; vertical-align: middle"
-            >
-              Not Parrent
-            </td>
-            <td
-              th:text="${post.createAt}"
-              style="text-align: center; vertical-align: middle"
-            ></td>
-<!-- th:href="@{/admin/post/edit/${post.id}}" -->
-            <td  >
-            
-            <div class="d-flex flex-column" style="text-align: center; vertical-align: middle">
-            <a th:href="@{'/admin/post/censor?action=false&idPost='+${post.id}}" class="btn btn-danger btn-sm"> <i class="fa-solid fa-xmark"></i> </a>
-             </div>
-              
-              
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Image</th>
+					<th scope="col">Title</th>
+					<th scope="col">Author</th>
+					<th scope="col">Status</th>
+					<th scope="col">Comments</th>
+					<th scope="col">Parent</th>
+					<th scope="col">Created at</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="post,iter : ${posts}">
+					<th scope="row" style="text-align: center; vertical-align: middle"
+						th:text="${iter.index} + 1"></th>
+					<td style="text-align: center; vertical-align: middle;"><img
+						alt="" th:src="${post.avatar}"
+						style="width: 50px; height: 50px; border-radius: 8px;" /></td>
+					<td th:text="${post.title}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.author.userName}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.status}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.countComments}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:if="${post.postParrent}" th:text="${post.postParrent.id}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:unless="${post.postParrent}"
+						style="text-align: center; vertical-align: middle">Not
+						Parrent</td>
+					<td th:text="${#dates.format(post.createAt, 'dd-MM-yyyy')}"
+						style="text-align: center; vertical-align: middle"></td>
+					<!-- th:href="@{/admin/post/edit/${post.id}}" -->
+					<td class="d-flex flex-column"
+						style="text-align: center; vertical-align: middle"><a
+						th:href="@{'/admin/post/censor?action=true&idPost='+${post.id}}"
+						class="btn btn-primary mb-2 btn-sm"> <i
+							class="fa-solid fa-check"></i></a> <a
+						th:href="@{'/admin/post/censor?action=false&idPost='+${post.id}}"
+						class="btn btn-danger btn-sm"> <i class="fa-solid fa-xmark"></i>
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h5 class="font-weight-bold">Post processed</h5>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Image</th>
+					<th scope="col">Title</th>
+					<th scope="col">Author</th>
+					<th scope="col">Status</th>
+					<th scope="col">Comments</th>
+					<th scope="col">Parent</th>
+					<th scope="col">Created at</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="post,iter : ${postsTrue}">
+					<th scope="row" style="text-align: center; vertical-align: middle"
+						th:text="${iter.index} + 1"></th>
+					<td style="text-align: center; vertical-align: middle;"><img
+						alt="" th:src="${post.avatar}"
+						style="width: 50px; height: 50px; border-radius: 8px;" /></td>
+					<td th:text="${post.title}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.author.userName}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.status}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:text="${post.countComments}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:if="${post.postParrent}" th:text="${post.postParrent.id}"
+						style="text-align: center; vertical-align: middle"></td>
+					<td th:unless="${post.postParrent}"
+						style="text-align: center; vertical-align: middle">Not
+						Parrent</td>
+					<td th:text="${post.createAt}"
+						style="text-align: center; vertical-align: middle"></td>
+					<!-- th:href="@{/admin/post/edit/${post.id}}" -->
+					<td>
+
+						<div class="d-flex flex-column"
+							style="text-align: center; vertical-align: middle">
+							<a
+								th:href="@{'/admin/post/censor?action=false&idPost='+${post.id}}"
+								class="btn btn-danger btn-sm"> <i class="fa-solid fa-xmark"></i>
+							</a>
+						</div>
+
+
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
 </html>

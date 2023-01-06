@@ -144,4 +144,9 @@ public class CommentService implements ICommentService {
 		return commentRepository.count();
 	}
 
+	@Override
+	public Long countCommentsByIdPost(Long idPost) {
+		return commentRepository.countCommentsByIdPost(idPost);
+	}
+
 }

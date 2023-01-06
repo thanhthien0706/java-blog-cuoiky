@@ -38,12 +38,14 @@ public class BlogController {
 
 		List<CommentMainDto> comments = commentService.getAllCommentWithSlugPost(slugBlog, 5);
 		List<CategoryListDto> categories = categoryService.findAllNameListCategory();
+		Long countComments = commentService.countCommentsByIdPost(postMain.getId());
 
 		ModelAndView mav = new ModelAndView("web/blog-detail.html");
 
 		mav.addObject("postMain", postMain);
 		mav.addObject("comments", comments);
 		mav.addObject("categories", categories);
+		mav.addObject("countComments", countComments);
 
 		return mav;
 	}

@@ -2,6 +2,8 @@ package com.thanhthien.cuoiki.services;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.thanhthien.cuoiki.dto.PostDetailDto;
 import com.thanhthien.cuoiki.dto.PostEditDto;
 import com.thanhthien.cuoiki.dto.PostShowDto;
@@ -44,5 +46,7 @@ public interface IPostService {
 	Long countAllPost();
 
 	List<Long> countPostWithMonth(Long year);
+
+//	List<PostEntity> getPostWithCategoryId(Long idCategory);
 
 }
