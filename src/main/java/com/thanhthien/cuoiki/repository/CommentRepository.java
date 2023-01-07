@@ -18,7 +18,7 @@ public interface CommentRepository extends CrudRepository<CommentEntity, Long> {
 
 	CommentEntity findOneById(Long id);
 
-	@Query(nativeQuery = true, value = "SELECT * FROM db_comments c WHERE c.post_id = :idPost AND c.parent_id IS NULL ORDER BY c.create_at DESC LIMIT :limit ")
+	@Query(nativeQuery = true, value = "SELECT * FROM db_comments c WHERE c.post_id = :idPost AND c.parent_id IS NULL AND c.status = 1 ORDER BY c.create_at DESC LIMIT :limit ")
 	List<CommentEntity> getCommentWithId(Long idPost, int limit);
 
 	@Query(nativeQuery = true, value = "SELECT * FROM db_comments c INNER JOIN db_posts p ON c.post_id = p.id WHERE p.author_id = :authorId AND c.parent_id IS NULL")
@@ -33,7 +33,7 @@ public interface CommentRepository extends CrudRepository<CommentEntity, Long> {
 	@Query(nativeQuery = true, value = "SELECT * FROM db_comments c ORDER BY c.create_at DESC LIMIT :limit")
 	List<CommentEntity> getNewCommentLimit(int limit);
 
-	@Query(nativeQuery = true, value = "SELECT COUNT(*) FROM db_comments c WHERE c.post_id = :idPost")
+	@Query(nativeQuery = true, value = "SELECT COUNT(*) FROM db_comments c WHERE c.post_id = :idPost AND c.status = 1")
 	Long countCommentsByIdPost(Long idPost);
 
 }
